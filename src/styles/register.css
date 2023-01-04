@@ -1,0 +1,149 @@
+header {
+    border-bottom: 1px solid var(--color-grey-3);
+
+    background-color: var(--color-white);
+
+    position: fixed;
+    z-index: 1;
+
+    width: 100%;
+}
+
+header > .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+header > .container > div {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 26px 0;
+}
+
+header > .container > div > div {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-7);
+}
+
+header > .container > nav {
+    display: flex;
+    justify-content: space-evenly;
+    
+    padding: 26px 0;
+    
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+
+    position: absolute;
+    z-index: 1;
+    top: 58px;
+    left: 0;
+
+    width: 100%;
+
+    display: none;
+}
+
+header > .container > nav > button {
+    width: 142px;
+    height: 48px;  
+}
+
+.background {
+    background-image: url(../assets/images/Rectangle\ 7.svg);
+    background-size: cover;
+}
+
+body > div > .container {
+
+    /* background-color: red; */
+    height: 100vh;
+    
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register__container {
+    /* position: absolute; */
+
+    background-color: var(--color-white-95);
+
+    margin: auto auto;
+    padding: 42px;
+
+    width: 100vw;
+    max-width: 506px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: var(--font-weight-1);
+    line-height: var(--line-heigth-3);
+
+    padding: 26px 0;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.register > input, .register > select {
+    border: 1px solid var(--color-grey-3);
+
+    width: 100%;
+    height: 52px;
+
+    color: var(--color-grey-1);
+
+    padding: 0 20px;
+}
+
+.register > input::placeholder, .register > select {
+
+    color: var(--color-grey-1);
+}
+
+.register > button {
+    height: 48px;
+}
+
+/* 
+.register > select > option::selection {
+    background-color: var(--color-white);
+} */
+
+
+@media screen and (min-width: 769px) {
+    header > .container {
+        flex-direction: row;
+    }
+    header > .container > div > i {
+        display: none;
+    }
+    header > .container > nav {
+        display: flex;
+        gap: 12px;
+
+        position: static;
+
+        max-width: fit-content;
+
+        box-shadow: none;
+    }
+    /* main {
+        display: flex;
+        justify-content: space-between;
+        gap: 60px;
+
+        margin: 0 auto;
+    } */
+}

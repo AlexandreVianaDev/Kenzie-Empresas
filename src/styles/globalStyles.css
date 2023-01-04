@@ -10,6 +10,7 @@
 
   --color-black: #000000;
   --color-white: #FFFFFF;
+  --color-white-95: rgba(255, 255, 255, 0.95);
 
   --bg-color: #FFFFFF;
   --bg-modal-canvas: #4623A713; 
@@ -103,7 +104,7 @@ button {
 /* H2 */
 .title-2 {
   font-size: var(--font-size-2);
-  font-weight: var(--font-weight-2);
+  font-weight: var(--font-weight-1);
   line-height: var(--line-heigth-3);
 }
 
