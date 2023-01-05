@@ -111,6 +111,15 @@ body > .container {
     background-color: var(--color-grey-4);
 }
 
+.sector__list > li {
+    width: 95%;
+
+    margin: 0 auto;
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--color-brand-1);
+}
+
 .enterprise__list {
     display: flex;
     gap: var(--gap-5);
@@ -158,6 +167,15 @@ body > .container {
     }
     header > .container > div > i {
         display: none;
+    }
+    header > .container > div > div > img:first-child {
+        width: 16px;
+        height: 16px;
+    }
+    
+    header > .container > div > div > img:last-child {
+        width: 172px;
+        height: 21px;
     }
     header > .container > nav {
         display: flex;

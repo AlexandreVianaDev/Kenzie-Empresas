@@ -15,12 +15,12 @@
   <!-- CSS Globals -->
   <link rel="stylesheet" href="../styles/globalStyles.css" />
   <!-- CSS Page -->
-  <link rel="stylesheet" href="../styles/register.css" />
+  <link rel="stylesheet" href="../styles/login.css" />
   <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/6b12ebc41a.js" crossorigin="anonymous"></script>
   <!-- JS Page -->
-  <script type="module" src="../scripts/register.js" defer></script>
-  <title>Kenzie Empresas - Cadastre-se</title>
+  <script type="module" src="../scripts/login.js" defer></script>
+  <title>Kenzie Empresas - Login</title>
   <meta name="description" content="Home Website" />
 </head>
 
@@ -37,7 +37,7 @@
       </div>
       <nav>
           <button class="button-white-blue">Home</button>
-          <button class="button-blue">Login</button>         
+          <button class="button-blue">Cadastro</button>         
       </nav>
     </div>
   </header>
@@ -46,20 +46,16 @@
     <div class="container">
       <main>
         <section class="register__container">
-          <h1>Cadastre-se</h1>
+          <div>
+            <h1>Login</h1>
+            <p>Preencha os campos para realizar login</p>
+          </div>
           <form action="#" class="register">
-            <input class="text-2" type="text" name="name" id="name" placeholder="Seu nome">
             <input class="text-2" type="email" name="email" id="email" placeholder="Seu e-mail">
             <input class="text-2" type="password" name="password" id="password" placeholder="Sua senha">
-            <select class="text-2" name="professional">
-              <option value="estagio">Estágio</option>
-              <option value="junior">Júnior</option>
-              <option value="pleno">Pleno</option>
-              <option value="senior">Sênior</option>
-            </select>
-
-            <button class="register__button button-blue">Cadastre-se</button>
-            <button class="return__button button-white-blue">Retornar</button>
+            <button class="register__button button-blue">Login</button>
+            <span>ou</span>
+            <button class="return__button button-white-blue">Cadastre-se</button>
           </form>
         </section>
       </main>

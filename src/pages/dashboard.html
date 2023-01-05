@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../../assets/img/favicons/favicon.jpeg" type="image/x-icon" />
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- CSS Reset -->
+  <link rel="stylesheet" href="../styles/reset.css" />
+  <!-- CSS Globals -->
+  <link rel="stylesheet" href="../styles/globalStyles.css" />
+  <!-- CSS Page -->
+  <link rel="stylesheet" href="../styles/dashboard.css" />
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/6b12ebc41a.js" crossorigin="anonymous"></script>
+  <!-- JS Page -->
+  <script type="module" src="../scripts/dashboard.js" defer></script>
+  <title>Kenzie Empresas - Dashboard</title>
+  <meta name="description" content="Home Website" />
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div>
+        <div>
+          <img src="../../src/assets/images/logo/Ellipse 1.svg">
+          <img src="../../src/assets/images/logo/Kenzie Empresas.svg" alt="">
+        </div>
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <nav>
+          <button class="button-white-blue">Logout</button>        
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+      <!-- ADMIN DASHBOARD -->
+      <!-- <section class="section-1">
+        <div class="section1__header">
+          <h2 class="title-3">Departamentos</h2>
+
+          <select name="departaments" id="departaments" class="text-1">
+            <option value="standard">Selecionar Empresa</option>
+            <option value="007c8e04-5617-4434-8333-274ab2b7e155">Skina Lanches</option>
+            <option value="007c8e04-5617-4434-8333-274ab2b7e155">Skina Lanches</option>
+          </select>
+
+          <button class="button-blue text-2"><i class="fa-solid fa-plus"></i> Criar</button>
+        </div>
+        <ul class="departament__list">
+          <li>
+            <div class="departament__header">
+              <h4 class="title-4">Departament Name</h4>
+              <p>Departament Description</p>
+              <span>Company Name</span>
+            </div>
+            <div class="departament__control">
+              <i class="fa-regular fa-eye"></i>
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="departament__header">
+              <h4 class="title-4">Departament Name</h4>
+              <p>Departament Description</p>
+              <span>Company Name</span>
+            </div>
+            <div class="departament__control">
+              <i class="fa-regular fa-eye"></i>
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="departament__header">
+              <h4 class="title-4">Departament Name</h4>
+              <p>Departament Description</p>
+              <span>Company Name</span>
+            </div>
+            <div class="departament__control">
+              <i class="fa-regular fa-eye"></i>
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="departament__header">
+              <h4 class="title-4">Departament Name</h4>
+              <p>Departament Description</p>
+              <span>Company Name</span>
+            </div>
+            <div class="departament__control">
+              <i class="fa-regular fa-eye"></i>
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="departament__header">
+              <h4 class="title-4">Departament Name</h4>
+              <p>Departament Description</p>
+              <span>Company Name</span>
+            </div>
+            <div class="departament__control">
+              <i class="fa-regular fa-eye"></i>
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="departament__header">
+              <h4 class="title-4">Departament Name</h4>
+              <p>Departament Description</p>
+              <span>Company Name</span>
+            </div>
+            <div class="departament__control">
+              <i class="fa-regular fa-eye"></i>
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+        </ul>
+
+
+      </section>
+
+      <section class="section-2">
+        <h2 class="title-3">Usuários cadastrados</h2>
+        <ul class="users__list">
+          <li>
+            <div class="user__header">
+              <h4 class="title-4">Username</h4>
+              <span>Pleno</span>
+              <span>Company Name</span>
+            </div>
+            <div class="user__control">
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="user__header">
+              <h4 class="title-4">Username</h4>
+              <span>Pleno</span>
+              <span>Company Name</span>
+            </div>
+            <div class="user__control">
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="user__header">
+              <h4 class="title-4">Username</h4>
+              <span>Pleno</span>
+              <span>Company Name</span>
+            </div>
+            <div class="user__control">
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="user__header">
+              <h4 class="title-4">Username</h4>
+              <span>Pleno</span>
+              <span>Company Name</span>
+            </div>
+            <div class="user__control">
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+          <li>
+            <div class="user__header">
+              <h4 class="title-4">Username</h4>
+              <span>Pleno</span>
+              <span>Company Name</span>
+            </div>
+            <div class="user__control">
+              <i class="fa-solid fa-pencil"></i>
+              <i class="fa-regular fa-trash-can"></i>
+            </div>
+          </li>
+        </ul>
+      </section> -->
+
+      <!-- USER DASHBOARD -->
+      <section class="user__section--1">
+        <div>
+          <h2 class="title-3">USERNAME</h2>
+          <div class="user__infos">
+            <span>Email: meuemail@mail.com</span>
+            <span>Pleno</span>
+            <span>Home Office</span>
+          </div>
+        </div>
+        <i class="fa-solid fa-pencil"></i>
+
+
+
+
+      </section>
+
+      <!-- class="job--no" como classe para usuários não contratados -->
+      <section class="user__section--2">
+        <!-- <h2>Você ainda não foi contratado</h2> -->
+        <button class="button-blue title-3 company__name">Company Name - Department Name</button>
+        <ul class="colleagues__list">
+          <li>
+              <h4>Username</h4>
+              <span>Pleno</span>
+          </li>
+          <li>
+            <h4>Username</h4>
+            <span>Pleno</span>
+          </li> 
+          <li>
+            <h4>Username</h4>
+            <span>Pleno</span>
+          </li> 
+          <li>
+            <h4>Username</h4>
+            <span>Pleno</span>
+          </li> 
+          <li>
+            <h4>Username</h4>
+            <span>Pleno</span>
+          </li> 
+          <li>
+            <h4>Username</h4>
+            <span>Pleno</span>
+          </li> 
+        </ul>
+      </section>
+    </main>
+  </div>
+
+</body>
+
+</html>

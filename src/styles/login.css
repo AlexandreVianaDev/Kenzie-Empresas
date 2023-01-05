@@ -82,12 +82,25 @@ body > div > .container {
     max-width: 506px;
 }
 
+.register__container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
 h1 {
     font-size: 32px;
     font-weight: var(--font-weight-1);
     line-height: var(--line-heigth-3);
 
-    padding: 26px 0;
+    padding: 12px 0;
+}
+
+.register__container > div > p {
+    font-size: var(--font-size-9);
+    line-height: var(--line-height-9);
 }
 
 .register {
@@ -114,6 +127,13 @@ h1 {
 
 .register > button {
     height: 48px;
+}
+
+.register > span {
+    font-size: var(--font-size-9);
+    line-height: var(--line-height-9);
+
+    margin: 0 auto;
 }
 
 /* 
@@ -150,6 +170,12 @@ h1 {
     }
     h1 {
         font-size: var(--font-size-1);
+        font-weight: var(--font-weight-1);
+        line-height: var(--line-heigth-1);
+    }
+    .register__container > div > p {
+        font-size: var(--font-size-7);
+        line-height: var(--line-heigth-8);
     }
     /* main {
         display: flex;
