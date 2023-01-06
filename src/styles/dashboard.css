@@ -262,6 +262,10 @@ body > .container {
     margin-top: 32px;
 }
 
+.company__name:hover {
+    cursor: auto;
+}
+
 .colleagues__list {
     display: flex;
     flex-wrap: wrap;
@@ -287,6 +291,106 @@ body > .container {
 
 .colleagues__list > li > h4 {
     font-weight: var(--font-weight-1);
+}
+
+/* MODALS */
+
+.modal--big {
+    /* margin: auto auto; */
+    top: 120px;
+    margin: 0 auto;
+}
+
+.modal--big::backdrop {
+    background-color: var(--color-brand-3);
+}
+
+.modal--big > div {
+    max-width: 860px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+
+    padding: 39px 49px;
+}
+
+.modal--big > div > i {
+    font-size: 18px;
+
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+.modal--big > div > h2 {
+    font-size: var(--font-size-3);
+    word-wrap: break-word;
+}
+
+.departament__general {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.departament__informations {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hire__container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.hire__container > select {
+    color: var(--color-grey-2);
+    
+    max-width: 422px;
+
+    padding: 8px 16px;
+}
+
+.hire__container > button {
+    padding: 8px 16px;   
+
+    max-width: 422px;
+}
+
+.departament__users--list {
+    display: flex;
+    gap: var(--gap-5);
+
+    overflow-x: scroll;
+
+    padding: 20px;
+}
+
+.departament__users--list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    min-width: 240px;
+    /* min-height: 212px; */
+
+    border-bottom: 1px solid var(--color-brand-1);
+
+    padding: 12px;
+}
+.departament__users--list > li > button {
+    max-width: 157px;
+
+    padding: 12px 26px;
+
+    align-self: center;
 }
 
 @media screen and (min-width: 426px) {
@@ -400,6 +504,20 @@ body > .container {
         flex-direction: row;
 
         gap: 151px;
+    }
+    /* MODALS */
+
+    .departament__general {
+        flex-direction: row;
+    }
+
+    .hire__container > select {
+        width: 422px;
+    }
+
+    .hire__container > button {
+        width: 157px;
+        align-self: flex-end;
     }
 
 
