@@ -240,7 +240,8 @@
         </ul>
       </section>
 
-      <dialog class="modal--big modal__departament--control">
+      <!-- Controle de departamento -->
+      <dialog class="modal modal--big modal__departament--control">
         <div>
           <i class="fa-solid fa-xmark"></i>
           <h2 class="title-2">Nome do departamento</h2>
@@ -282,6 +283,95 @@
           </div>
         </div>
       </dialog>
+
+      <!-- Criar departamento -->
+      <dialog class="modal modal--small modal__departament--create">
+        <div>
+          <i class="fa-solid fa-xmark"></i>
+          <h2 class="title-2">Criar departamento</h2>
+          <form>
+            <input type="text"  name="departamentName" id="departamentName" placeholder="Nome do departamento">
+            <input type="text" name="departamentDescription" id="departamentDescription" placeholder="Descrição">
+            <select name="enterprisesList" id="enterprisesList" class="text-2">
+              <option value="">Selecionar empresa</option>
+              <option value="enterprise1" class="text-2">Empresa 1</option>
+              <option value="enterprise2" class="text-2">Empresa 2</option>
+              <option value="enterprise3" class="text-2">Empresa 3</option>
+            </select>
+            <button class="button-blue">Criar o departamento</button>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- Edita departamento -->
+      <dialog class="modal modal--small modal__departament--edit">
+        <div>
+          <i class="fa-solid fa-xmark"></i>
+          <h2 class="title-2">Editar departamento</h2>
+          <form>
+            <textarea name="departament__description" id="departament__description" cols="30" rows="10" placeholder="Valores anteriores da descrição"></textarea>
+            <button class="button-blue">Salvar alterações</button>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- Editar usuário (ADMIN) -->
+      <dialog class="modal modal--small modal__user--edit">
+        <div>
+          <i class="fa-solid fa-xmark"></i>
+          <h2 class="title-2">Editar Usuário</h2>
+          <form>
+            <select name="enterprisesList" id="enterprisesList" class="text-2">
+              <option value="">Selecionar modalidade de trabalho</option>
+              <option value="enterprise1" class="text-2">Presencial</option>
+              <option value="enterprise2" class="text-2">Híbrido</option>
+              <option value="enterprise3" class="text-2">HomeOffice</option>
+            </select>
+            <select name="enterprisesList" id="enterprisesList" class="text-2">
+              <option value="">Selecionar nível profissional</option>
+              <option value="estagio" class="text-2">Estágio</option>
+              <option value="junior" class="text-2">Júnior</option>
+              <option value="pleno" class="text-2">Pleno</option>
+              <option value="senior" class="text-2">Sênior</option>
+            </select>
+            <button class="button-blue">Editar</button>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- Aviso de remoção de usuário -->
+      <dialog class="modal modal--medium modal__warning--user-remove">
+        <div>
+          <i class="fa-solid fa-xmark"></i>
+          <h3>Realmente deseja remover o usuário NOME?</h3>
+          <button class="button-green">Deletar</button>
+        </div>
+      </dialog>
+
+      <!-- Aviso de remoção de departamento -->
+      <dialog class="modal modal--medium modal__warning--departament-remove">
+        <div>
+          <i class="fa-solid fa-xmark"></i>
+          <h3>Realmente deseja deletar o departamento NOME e demitir seus funcionários?</h3>
+          <button class="button-green">Confirmar</button>
+        </div>
+      </dialog>
+
+      <!-- Editar usuário (USER) -->
+      <dialog class="modal modal--small modal__profile--edit">
+        <div>
+          <i class="fa-solid fa-xmark"></i>
+          <h2 class="title-2">Editar Perfil</h2>
+          <form>
+            <input type="text"  name="profileName" id="profileName" placeholder="Seu nome">
+            <input type="text" name="profileEmail" id="profileEmail" placeholder="Seu e-mail">
+            <input type="password" name="profilePassword" id="profilePassword" placeholder="Sua senha">
+            <button class="button-blue">Editar Perfil</button>
+          </form>
+        </div>
+      </dialog>
+
+
     </main>
   </div>
 
