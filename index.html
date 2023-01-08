@@ -33,11 +33,11 @@
           <img src="./src/assets/images/logo/Ellipse 1.svg">
           <img src="./src/assets/images/logo/Kenzie Empresas.svg" alt="">
         </div>
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars" id="mobileMenu__icon"></i>
       </div>
-      <nav>
-          <button class="button-white-blue">Login</button>
-          <button class="button-blue">Cadastro</button>         
+      <nav class="hidden" id="menu">
+          <button class="button-white-blue" id="loginBtn">Login</button>
+          <button class="button-blue" id="registerBtn">Cadastro</button>         
       </nav>
     </div>
   </header>
@@ -52,22 +52,22 @@
 
       <section class="section-2">
         <div class="sectors">
-          <button class="button-blue">Selecionar Setor</button>
-          <i class="fa-solid fa-arrow-down"></i>
-          <ul class="sector__list hidden">
-            <li>Aeroespacial</li>
-            <li>Alimentício</li>
-            <li>Atacado</li>
-            <li>Automotiva</li>
-            <li>Manufatura</li>
-            <li>Textil</li>
-            <li>TI</li>
-            <li>Varejo</li>
-          </ul>
+          <select name="sectors" id="sectors" class="button-blue text-1">
+            <!-- <i class="fa-solid fa-arrow-down"></i> -->
+            <option value="">Selecionar Setor</option>
+            <option value="Aeroespacial">Aeroespacial</option>
+            <option value="Alimenticio">Alimentício</option>
+            <option value="Atacado">Atacado</option>
+            <option value="Automotiva">Automotiva</option>
+            <option value="Manufatura">Manufatura</option>
+            <option value="Textil">Textil</option>
+            <option value="TI">TI</option>
+            <option value="Varejo">Varejo</option>
+          </select>
         </div>
 
-        <ul class="enterprise__list">
-          <li>
+        <ul class="company__list">
+          <!-- <li>
             <h4 class="title-4">Empresa Name</h4>
             <div>
               <span>10 horas</span>
@@ -94,7 +94,7 @@
               <span>10 horas</span>
               <span class="sector__tag">Setor</span>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>

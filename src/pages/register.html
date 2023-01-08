@@ -33,11 +33,11 @@
           <img src="../assets/images/logo/Ellipse 1.svg">
           <img src="../assets/images/logo/Kenzie Empresas.svg" alt="">
         </div>
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars" id="mobileMenu__icon"></i>
       </div>
-      <nav>
-          <button class="button-white-blue">Home</button>
-          <button class="button-blue">Login</button>         
+      <nav class="hidden" id="menu">
+          <button class="button-white-blue" id="homeBtn">Home</button>
+          <button class="button-blue" id="loginBtn">Login</button>         
       </nav>
     </div>
   </header>
@@ -48,14 +48,15 @@
         <section class="register__container">
           <h1>Cadastre-se</h1>
           <form action="#" class="register">
-            <input class="text-2" type="text" name="name" id="name" placeholder="Seu nome">
+            <input class="text-2" type="text" name="username" id="username" placeholder="Seu nome">
             <input class="text-2" type="email" name="email" id="email" placeholder="Seu e-mail">
             <input class="text-2" type="password" name="password" id="password" placeholder="Sua senha">
-            <select class="text-2" name="professional">
-              <option value="estagio">Estágio</option>
-              <option value="junior">Júnior</option>
+            <select class="text-2" name="professional_level" id="professional_level">
+              <option value="">Nível profissional</option>
+              <option value="estágio">Estágio</option>
+              <option value="júnior">Júnior</option>
               <option value="pleno">Pleno</option>
-              <option value="senior">Sênior</option>
+              <option value="sênior">Sênior</option>
             </select>
 
             <button class="register__button button-blue">Cadastre-se</button>

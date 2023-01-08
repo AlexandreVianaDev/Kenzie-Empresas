@@ -46,8 +46,6 @@ header > .container > nav {
     left: 0;
 
     width: 100%;
-
-    display: none;
 }
 
 header > .container > nav > button {
@@ -85,6 +83,16 @@ body > .container {
     margin: 0 auto;
 }
 
+.sectors > select {
+    width: 100%;
+
+    text-align: center;
+
+    padding: 12px;
+
+    font-size: var(--font-size-6);
+}
+/* 
 .sectors > i {
     color: var(--color-white);
     font-size: var(--font-size-5);
@@ -105,7 +113,7 @@ body > .container {
     padding: 12px 0;
 
     font-weight: var(--font-weight-2)
-}
+} */
 
 .sector__list {
     background-color: var(--color-grey-4);
@@ -120,7 +128,7 @@ body > .container {
     border-bottom: 1px solid var(--color-brand-1);
 }
 
-.enterprise__list {
+.company__list {
     display: flex;
     gap: var(--gap-5);
 
@@ -129,7 +137,7 @@ body > .container {
     padding: 20px;
 }
 
-.enterprise__list > li {
+.company__list > li {
     min-width: 240px;
     min-height: 212px;
 
@@ -142,7 +150,7 @@ body > .container {
     padding-top: 12px;
 }
 
-.enterprise__list > li > div {
+.company__list > li > div {
     display: flex;
     flex-direction: column;
     gap: var(--gap-6);
@@ -160,6 +168,7 @@ body > .container {
 
     padding: 6px 16px;
 }
+
 
 @media screen and (min-width: 769px) {
     header > .container {
@@ -203,14 +212,14 @@ body > .container {
 
         margin: 0;
     }
-    .enterprise__list {
+    .company__list {
         flex-direction: column;
         align-items: center;
 
         overflow-x: hidden;
         overflow-y: scroll;
     }
-    .enterprise__list > li {
+    .company__list > li {
         min-height: 134px;
         min-width: 100%;
 

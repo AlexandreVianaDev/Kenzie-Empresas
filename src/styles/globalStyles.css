@@ -135,6 +135,14 @@ button {
   line-height: var(--line-heigth-8);
 }
 
+.title-blue {
+  color: var(--color-white);
+  font-size: var(--font-size-3);
+
+  border: 1px solid var(--color-brand-1);
+  background-color: var(--color-brand-1);
+}
+
 /* BUTTONS */
 
 .button-white-blue {
@@ -170,5 +178,5 @@ button {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
