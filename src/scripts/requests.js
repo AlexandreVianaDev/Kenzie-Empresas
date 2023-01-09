@@ -230,3 +230,33 @@ export async function createDepartment(data) {
 
     return departmentJSON
 }
+
+export async function getUsersWithoutJob(){
+    const users = await fetch(`${baseURL}/admin/out_of_work`, {
+        method:"GET",
+        headers: headers
+    })
+
+    const usersJSON = await users.json()
+
+    return usersJSON
+}
+
+export async function hireUser(data) {
+    const user = await fetch(`${baseURL}/departments/hire/`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+
+    const userJSON = await user.json()
+
+    return userJSON
+}
+
+export async function fireUser(uuid) {
+    const user = await fetch(`${baseURL}/departments/dismiss/${uuid}`, {
+        method:"PATCH",
+        headers: headers
+    })
+}

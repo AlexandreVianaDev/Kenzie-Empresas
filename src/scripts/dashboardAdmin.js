@@ -1,4 +1,4 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment } from "./requests.js"
+import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, fireUser } from "./requests.js"
 
 import { menuMobile } from "./globalScripts.js"
 
@@ -37,51 +37,12 @@ async function renderCompanies() {
 
 }
 
-async function renderDepartmentsFromCompany(uuid) {
-    const departments = await getAllDepartmentsFromCompany(uuid)
-    const departmentList = document.querySelector(".department__list")
-    const main = document.querySelector("main")
-    console.log(departments)
-
-    departmentList.innerHTML = ""
-
-    if(departments.length > 0){
-        departments.forEach(department => {
-            const { name, description} = department
-            const companyName = department.companies.name
-    
-            departmentList.insertAdjacentHTML("beforeend", `
-                <li>
-                    <div class="department__header">
-                        <h4 class="title-4">${name}</h4>
-                        <p>${description}</p>
-                        <span>${companyName}</span>
-                    </div>
-                    <div class="department__control">
-                        <i class="fa-regular fa-eye"></i>
-                        <i class="fa-solid fa-pencil"></i>
-                        <i class="fa-regular fa-trash-can"></i>
-                    </div>
-                </li>
-            `)
-        })
-    } else {
-        console.log("a")
-        departmentList.insertAdjacentHTML("beforeend", `
-            <li class="department--no">
-                <h2>A empresa ainda não possui departamentos</h2>
-            </li>
-        `)
-    }
-
-}
-
 async function renderDepartments() {
     const departmentList = document.querySelector(".department__list")
     const departments = await getAllDepartments()
 
     departments.forEach(department => {
-        const { name, description} = department
+        const { name, description, uuid} = department
         const companyName = department.companies.name
 
         departmentList.insertAdjacentHTML("beforeend", `
@@ -92,13 +53,72 @@ async function renderDepartments() {
                     <span>${companyName}</span>
                 </div>
                 <div class="department__control">
-                    <i class="fa-regular fa-eye"></i>
-                    <i class="fa-solid fa-pencil"></i>
-                    <i class="fa-regular fa-trash-can"></i>
+                    <i class="fa-regular fa-eye viewDepartment" data-uuid="${uuid}"></i>
+                    <i class="fa-solid fa-pencil editDepartment" data-uuid="${uuid}"></i>
+                    <i class="fa-regular fa-trash-can deleteDepartment" data-uuid="${uuid}"></i>
                 </div>
             </li>
         `)
     })
+
+    prepareDepartmentButtons()
+}
+
+async function renderDepartmentsFromCompany(uuid) {
+    const departments = await getAllDepartmentsFromCompany(uuid)
+    const departmentList = document.querySelector(".department__list")
+    const main = document.querySelector("main")
+    // console.log(departments)
+
+    departmentList.innerHTML = ""
+
+    if(departments.length > 0){
+        departments.forEach(department => {
+            const { name, description, uuid} = department
+            const companyName = department.companies.name
+    
+            departmentList.insertAdjacentHTML("beforeend", `
+                <li>
+                    <div class="department__header">
+                        <h4 class="title-4">${name}</h4>
+                        <p>${description}</p>
+                        <span>${companyName}</span>
+                    </div>
+                    <div class="department__control">
+                        <i class="fa-regular fa-eye viewDepartment" data-uuid="${uuid}"></i>
+                        <i class="fa-solid fa-pencil editDepartment" data-uuid="${uuid}"></i>
+                        <i class="fa-regular fa-trash-can deleteDepartment" data-uuid="${uuid}"></i>
+                    </div>
+                </li>
+            `)
+        })
+    } else {
+        // console.log("a")
+        departmentList.insertAdjacentHTML("beforeend", `
+            <li class="department--no">
+                <h2>A empresa ainda não possui departamentos</h2>
+            </li>
+        `)
+    }
+    prepareDepartmentButtons()
+}
+
+async function prepareDepartmentButtons() {
+    const viewDepartmentBtns = document.querySelectorAll(".viewDepartment")
+    const editDepartmentBtns = document.querySelectorAll(".editDepartment")
+    const deleteDepartmentBtns = document.querySelectorAll(".deleteDepartment")
+
+    viewDepartmentBtns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault()
+            const uuid = event.target.dataset.uuid
+            // console.log(uuid)
+            modalViewDepartament(uuid)
+        })
+    })
+
+    // console.log(viewDepartmentBtns)
+
 }
 
 async function renderUsers() {
@@ -174,75 +194,125 @@ async function renderUsers() {
     })
 }
 
-async function modalViewDepartament() {
+async function modalViewDepartament(uuid) {
     const modal = document.querySelector("dialog")
 
     modal.classList.remove("modal--small")
     modal.classList.remove("modal--medium")
     modal.classList.add("modal--big")
-    // modal.classList.add("modal__departament--control")
+
+    const departments = await getAllDepartments()
+  
+    const department = await departments.find(department => { return department.uuid == uuid})
+
+    const { name,  description } = department
+    const companyName = department.companies.name
+
+    console.log(department)
+
+    modal.innerHTML = ""
 
     modal.insertAdjacentHTML("beforeend", `
         <div>
-          <i class="fa-solid fa-xmark"></i>
-          <h2 class="title-2">Nome do departamento</h2>
+          <i class="fa-solid fa-xmark" id="closeBtn"></i>
+          <h2 class="title-2">${name}</h2>
           <div class="department__general">
             <div class="department__informations">
-              <p class="title-4">Descrição do departamento</p>
-              <span class="text-2">Empresa pertencente</span>
+              <p class="title-4">${description}</p>
+              <span class="text-2">${companyName}</span>
             </div>
             <div class="hire__container">
               <select name="users" id="users" class="text-2">
-                <option value="user-1" class="text-2">Usuário 1</option>
-                <option value="user-2" class="text-2">Usuário 2</option>
-                <option value="user-3" class="text-2">Usuário 3</option>
+                <option value="" class="text-2">Selecionar usuário</option>
               </select>
-              <button class="button-green">Contratar</button>
+              <button class="button-green" id="hireBtn">Contratar</button>
             </div>
           </div>
           <div>
             <ul class="department__users--list">
-              <li>
-                  <h4 class="title-4">Username</h4>
-                  <span>Pleno</span>
-                  <span>Company Name</span>
-                  <button class="button-white-red">Desligar</button>
-              </li>
-              <li>
-                <h4 class="title-4">Username</h4>
-                <span>Pleno</span>
-                <span>Company Name</span>
-                <button class="button-white-red">Desligar</button>
-            </li>
-            <li>
-                <h4 class="title-4">Username</h4>
-                <span>Pleno</span>
-                <span>Company Name</span>
-                <button class="button-white-red">Desligar</button>
-            </li>
-            <li>
-                <h4 class="title-4">Username</h4>
-                <span>Pleno</span>
-                <span>Company Name</span>
-                <button class="button-white-red">Desligar</button>
-            </li>
-            <li>
-                <h4 class="title-4">Username</h4>
-                <span>Pleno</span>
-                <span>Company Name</span>
-                <button class="button-white-red">Desligar</button>
-            </li>
             </ul>
           </div>
         </div>
     `)
 
+    const closeBtn = document.querySelector("#closeBtn")
+
+    closeBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modal.close()
+    })
+
+    const select = document.querySelector("#users")
+    const usersWithoutJob = await getUsersWithoutJob()
+
+
+
+    usersWithoutJob.forEach(user => {
+        // console.log(user)
+        const { username, uuid } = user
+
+        select.insertAdjacentHTML("beforeend", `
+            <option value="${uuid}" class="text-2">${username}</option>
+        `)
+    })
+
+    const hireBtn = document.querySelector("#hireBtn")
+
+    hireBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        const data = {
+            user_uuid: select.value,
+            department_uuid: uuid
+        }
+
+        hireUser(data)
+    })
+
+    const departmentUsersList = document.querySelector(".department__users--list")
+
+    const allUsers = await getAllUsers()
+    const departamentUsers = allUsers.filter(user => { return user.department_uuid == uuid })
+
+    departamentUsers.forEach(user => {
+        const { username, professional_level, kind_of_work, uuid } = user
+
+        const li = document.createElement("li")
+
+        li.insertAdjacentHTML("beforeend", `
+            <h4 class="title-4">${username}</h4>
+        `)
+
+        const spanProfessional = document.createElement("span")
+        if (professional_level) {
+            spanProfessional.innerText = `${professional_level}`
+            li.appendChild(spanProfessional)
+        }
+        
+        const spanDepartment = document.createElement("span")
+        if (kind_of_work) {
+            spanDepartment.innerText = `${kind_of_work}`
+            li.appendChild(spanDepartment)
+        }
+
+        li.insertAdjacentHTML("beforeend", `
+            <button class="button-white-red fireBtn" data-uuid="${uuid}">Desligar</button>
+        `)
+
+        departmentUsersList.appendChild(li)
+    })
+
+    const fireBtns = document.querySelectorAll(".fireBtn")
+
+    fireBtns.forEach(button => {
+        button.addEventListener("click", (event) => {
+            event.preventDefault()
+            // console.log(event.target.dataset.uuid)
+            fireUser(event.target.dataset.uuid)
+
+        })
+    })
+
     modal.showModal()
-}
-
-function buttonModalCreateDepartment() {
-
-
 }
 
 async function modalCreateDepartment() {
