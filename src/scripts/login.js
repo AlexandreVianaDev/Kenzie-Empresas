@@ -1,6 +1,15 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login } from "./requests.js"
+import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, isLogged } from "./requests.js"
 
-import { menuMobile, acessLogin, acessRegister, acessHome, acessDashboard } from "./globalScripts.js"
+import { menuMobile } from "./globalScripts.js"
+
+async function checkIsLogged () {
+    const logged = await isLogged()
+    if (logged == "admin") {
+        window.location.replace("/src/pages/dashboardAdmin.html")
+    } else if (logged == "usuario") {
+        window.location.replace("/src/pages/dashboard.html")
+    }
+}
 
 function loginForm() {
     const inputs = document.querySelectorAll(".register > input")
@@ -25,12 +34,10 @@ function loginForm() {
 
         login(data)
     })
-
 }
 
-function start() {
-    acessRegister()
-    acessHome()   
+function start() {  
+    checkIsLogged ()
     menuMobile()
     loginForm()
 }

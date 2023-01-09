@@ -1,6 +1,6 @@
 import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register } from "./requests.js"
 
-import { menuMobile, acessLogin, acessRegister, acessHome, acessDashboard } from "./globalScripts.js"
+import { menuMobile } from "./globalScripts.js"
 
 
 function registerForm() {
@@ -38,8 +38,6 @@ function registerForm() {
 
 
 function start() {
-    acessHome()
-    acessLogin()
     menuMobile()
     registerForm()
 }

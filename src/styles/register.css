@@ -47,7 +47,7 @@ header > .container > nav {
     width: 100%;
 }
 
-header > .container > nav > button {
+header > .container > nav > a > button {
     width: 142px;
     height: 48px;  
 }

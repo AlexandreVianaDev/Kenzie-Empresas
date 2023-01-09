@@ -1,15 +1,18 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers } from "./requests.js"
+import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, updateProfile } from "./requests.js"
 
-import { menuMobile, acessLogin, acessRegister, acessHome, acessDashboard } from "./globalScripts.js"
+import { menuMobile } from "./globalScripts.js"
 
-async function userType() {
+async function checkIsLogged() {
+    const logged = await isLogged()
 
-    const user = await checkAdmin()
-
-    if(user.isAdmin) {
-        renderAdmin()
+    if (!logged) {
+        window.location.replace("/")
     } else {
-        renderUser()
+        const user = await checkAdmin()
+
+        if(user.is_admin) {
+            window.location.replace("/src/pages/dashboardAdmin.html")
+        }
     }
 }
 
@@ -23,16 +26,28 @@ async function renderUser() {
     main.insertAdjacentHTML("beforeend", `
         <section class="user__section--1">
             <div>
-            <h2 class="title-3">${username}</h2>
-            <div class="user__infos">
-                <span>Email: ${email}</span>
-                <span>${professional_level}</span>
-                <span>${kind_of_work}</span>
-            </div>
+                <h2 class="title-3">${username}</h2>
+                <div class="user__infos">
+                    <span>Email: ${email}</span>
+                </div>
             </div>
             <i class="fa-solid fa-pencil" id="editProfileBtn"></i>
         </section>
     `)
+
+    const userInfos = document.querySelector(".user__infos")
+
+    if(professional_level) {
+        userInfos.insertAdjacentHTML("beforeend", `
+            <span>${professional_level}</span>
+        `)
+    }
+
+    if(kind_of_work) {
+        userInfos.insertAdjacentHTML("beforeend", `
+            <span>${kind_of_work}</span>
+        `)
+    }
 
     if(!department_uuid) { // se estiver desempregado
         main.insertAdjacentHTML("beforeend", `
@@ -75,13 +90,9 @@ async function renderUser() {
 
     }
 
+    openModal ()
     userCoworkers()
 }
-
-function renderAdmin() {
-    // console.log("É ADMIN")
-}
-
 
 function logout() {
     const logoutBtn = document.querySelector("#logoutBtn")
@@ -93,9 +104,47 @@ function logout() {
     })
 }
 
+async function openModal () {
+    const editBtn = document.querySelector("#editProfileBtn")
+    const modalEditProfile = document.querySelector(".modal__profile--edit")
+    const closeBtn = document.querySelector("#closeBtn")
+    const confirmBtn = document.querySelector("#confirmBtn")
+    const inputs = document.querySelectorAll("input")
+
+    const user = await getUserInfo()
+
+    inputs.forEach(input => {
+        input.value = user[input.id]
+    })
+
+    editBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modalEditProfile.showModal()
+    })
+
+    closeBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modalEditProfile.close()
+    })
+
+    confirmBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        const data = {}
+        inputs.forEach(input => {
+            if(input.value) {
+                data[input.id] = input.value
+            }
+        })
+        console.log(data)
+        updateProfile(data)
+        window.location.replace("/src/pages/dashboard.html")
+    })
+}
+
 function start() {
-    userType()
+    checkIsLogged()
     menuMobile()
+    renderUser()
     logout()
 }
 
@@ -108,37 +157,3 @@ start()
 
 
 
-
-
-
-
-
-
-
-const modalDepartament = document.querySelector(".modal__departament--control")
-
-const modalCreateDepartament = document.querySelector(".modal__departament--create")
-
-const modalEditDepartament = document.querySelector(".modal__departament--edit")
-
-const modalEditUser = document.querySelector(".modal__user--edit")
-
-const modalWarningUserRemove = document.querySelector(".modal__warning--user-remove")
-
-const modalWarningDepartamentRemove = document.querySelector(".modal__warning--departament-remove")
-
-const modalEditProfile = document.querySelector(".modal__profile--edit")
-
-// modalDepartament.showModal()
-
-// modalCreateDepartament.showModal()
-
-// modalEditDepartament.showModal()
-
-// modalEditUser.showModal()
-
-// modalWarningUserRemove.showModal()
-
-// modalWarningDepartamentRemove.showModal()
-
-// modalEditProfile.showModal()

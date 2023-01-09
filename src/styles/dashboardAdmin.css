@@ -1,0 +1,651 @@
+header {
+    border-bottom: 1px solid var(--color-grey-3);
+
+    background-color: var(--color-white);
+
+    position: fixed;
+    z-index: 1;
+
+    width: 100%;
+}
+
+header > .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+header > .container > div {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 26px 0;
+}
+
+header > .container > div > div {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-7);
+}
+
+header > .container > nav {
+    display: flex;
+    justify-content: space-evenly;
+    
+    padding: 26px 0;
+    
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+    background-color: var(--color-white);
+
+    background-color: var(--color-white);
+
+    position: absolute;
+    z-index: 1;
+    top: 58px;
+    left: 0;
+
+    width: 100%;
+}
+
+header > .container > nav > button {
+    width: 142px;
+    height: 48px;  
+}
+
+body > .container {
+    padding-top: 120px;
+}
+
+.section-1 {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 22px;
+}
+
+.section1__header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.section1__header > select {
+    border-radius: 15px;
+    border: 1px solid var(--color-black);
+
+    padding: 8px 24px;
+}
+
+.section1__header > button {
+    padding: 8px 24px;
+
+    position: relative;
+}
+
+.section1__header > button > i {
+    position: absolute;
+    left: 20px;
+}
+
+.department__list {
+    display: flex;
+    gap: var(--gap-5);
+
+    overflow-x: scroll;
+
+    padding: 20px;
+}
+
+.department__list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    min-width: 240px;
+    /* min-height: 212px; */
+
+    border-bottom: 1px solid var(--color-brand-1);
+
+    padding-top: 12px;
+}
+
+.department__header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.department__control {
+    display: flex;
+    justify-content: center;
+
+    gap: var(--gap-6);
+    font-size: var(--font-size-9);
+
+    padding-bottom: 12px;
+}
+
+.department__control > i:hover {
+    cursor: pointer;
+    color: var(--color-brand-1);
+}
+
+.section-2 {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+    /* margin: 0 auto; */
+    padding-top: 22px;
+}
+
+.users__list {
+    display: flex;
+    gap: var(--gap-5);
+
+    overflow-x: scroll;
+
+    padding: 20px;
+}
+
+.users__list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    min-width: 240px;
+    /* min-height: 212px; */
+
+    border-bottom: 1px solid var(--color-brand-1);
+
+    padding-top: 12px;
+}
+
+.user__header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user__control {
+    display: flex;
+    justify-content: center;
+
+    gap: var(--gap-6);
+    font-size: var(--font-size-9);
+
+    padding-bottom: 12px;
+}
+
+.user__control > i {
+    font-size: 26px;
+}
+
+.user__control > i:hover {
+    cursor: pointer;
+    color: var(--color-brand-1);
+}
+
+/* USER DASHBOARD CSS */
+
+.user__section--1 {
+    border: 1px solid var(--color-grey-3);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    position: relative;
+
+    padding: 20px 32px;
+}
+
+.user__section--1 > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user__infos {
+    font-size: var(--font-size-5);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user__section--1 > i {
+    font-size: 26px;
+
+    position: absolute;
+    top: 4px;
+    right: 8px;
+}
+
+.user__section--1 > i:hover {
+    cursor: pointer;
+
+    color: var(--color-brand-1);
+}
+
+/* USER WITHOUT JOB */
+
+.department--no {
+    width: 100%;
+    height: 480px;
+
+    margin: 0 auto;
+
+    /* border: 1px solid var(--color-grey-5); */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.department--no > h2 {
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-1);
+    line-height: var(--line-heigth-1);
+
+    padding: 12px;
+}
+
+/* USER WITH JOB */
+.company__name {
+    width: 100%;
+
+    padding: 18px 0;
+    margin-top: 32px;
+}
+
+.company__name:hover {
+    cursor: auto;
+}
+
+.coworkers__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 54px;
+
+    margin-top: 50px;
+}
+
+.coworkers__list > li {
+    font-size: 15px;
+
+    border: 1px solid var(--color-brand-1);
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    width: 318px;
+
+    padding: 12px 24px;
+}
+
+.coworkers__list > li > h4 {
+    font-weight: var(--font-weight-1);
+}
+
+/* MODALS */
+
+.modal {
+    margin: 0 auto;
+
+    top: 120px;
+    position: relative;
+}
+
+.modal > div {
+    width: 100%;
+}
+
+.modal > div > i {
+    font-size: 26px;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.modal > div > h2 {
+    font-size: var(--font-size-3);
+    word-wrap: break-word;
+}
+
+.modal::backdrop {
+    /* color: var(--color-brand-3); */
+    background: rgba(70, 35, 167, 0.13);
+}
+
+.modal--big {
+    width: 100%;
+    max-width: 860px;
+}
+
+.modal--big > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+
+    padding: 39px 49px;
+}
+
+.department__general {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.department__informations {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hire__container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.hire__container > select {
+    color: var(--color-grey-2);
+
+    border: 1px solid var(--color-grey-2);
+    
+    max-width: 422px;
+
+    padding: 8px 16px;
+}
+
+.hire__container > button {
+    padding: 8px 16px;   
+
+    max-width: 422px;
+}
+
+.ment__users--list {
+    display: flex;
+    gap: var(--gap-5);
+    overflow-x: scroll;
+
+    padding: 20px;
+}
+
+.department__users--list {
+    display: flex;
+    gap: 31px;
+
+    overflow-x: scroll;
+}
+
+.department__users--list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    min-width: 240px;
+    /* min-height: 212px; */
+
+    border-bottom: 1px solid var(--color-brand-1);
+
+    padding: 12px;
+}
+.department__users--list > li > button {
+    max-width: 157px;
+
+    padding: 12px 26px;
+
+    align-self: center;
+}
+
+.modal--small {
+    width: 100%;
+    max-width: 506px;
+
+    padding: 38px;
+}
+
+.modal--small > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal--small > div > form {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.modal--small > div > form > input {
+    border: 1px solid var(--color-grey-2);
+
+    /* color: var(--color-grey-1); */
+    font-size: var(--font-size-7);
+
+    padding: 16px;
+}
+
+.modal--small > div > form > input::placeholder {
+    color: var(--color-grey-1);
+}
+
+.modal--small > div > form > select {
+    border: 1px solid var(--color-grey-2);
+
+    font-size: var(--font-size-7);
+    color: var(--color-grey-1);
+
+    padding: 16px;
+}
+
+.modal--small > div > form > select > option {
+    color: var(--color-black);
+}
+
+.modal--small > div > form > button {
+    padding: 12px;
+}
+
+.modal--small > div > form > textarea {
+    border: 1px solid var(--color-grey-2);
+    
+    font-size: var(--font-size-7);
+
+    padding: 17px;
+
+    max-width: 420px;
+    height: 113px;
+    max-height: 200px;
+}
+.modal--small > div > form > textarea::placeholder {
+    color: var(--color-grey-1);
+}
+
+.modal--medium {
+    width: 100%;
+    max-width: 733px;
+}
+
+.modal--medium > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;   
+    gap: 34px;
+
+    padding: 12px 24px;
+    margin: 0 auto;
+
+    max-width: 422px;
+    min-height: 292px;
+}
+
+/* .modal--medium > div > i {
+    top: 8px;
+    right: 16px;
+} */
+
+.modal--medium > div > h3 {
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-1);
+    line-height: var(--line-height-4);
+    text-align: center;
+}
+
+.modal--medium > div > button {
+    padding: 12px 26px;
+
+    width: 100%;
+}
+
+
+@media screen and (min-width: 426px) {
+    /* USER DASHBOARD CSS */
+    .user__section--1  {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .user__section--1 > i {
+        position: static;
+    }    
+}
+
+@media screen and (min-width: 769px) {
+    header > .container {
+        flex-direction: row;
+    }
+    header > .container > div > i {
+        display: none;
+    }
+    header > .container > div > div > img:first-child {
+        width: 16px;
+        height: 16px;
+    }
+    
+    header > .container > div > div > img:last-child {
+        width: 172px;
+        height: 21px;
+    }
+    header > .container > nav {
+        display: flex;
+        gap: 12px;
+
+        position: static;
+
+        max-width: fit-content;
+
+        box-shadow: none;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 60px;
+
+        margin: 0 auto;
+    }
+    .section-1 {
+        /* height: 400px; */
+        width: 100%;
+        /* justify-content: flex-end; */
+    }
+    .section1__header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .section1__header > button {
+        padding: 8px 32px;
+    }
+    .section1__header > button > i {
+        left: 6px;
+    }
+    .department__list {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-self: flex-end;
+
+        width: 95%;
+        height: 400px;
+        max-height: 400px;
+
+        overflow-x: hidden;
+        overflow-y: scroll;        
+    }
+    .department__list > li {
+        width: 480px;
+        max-width: 45%;
+
+        /* min-height: 200px; */
+    }
+    /* .section-2 {   
+    } */
+    .section-2 > h2 {
+        text-align: center;
+    }
+    .users__list {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-self: flex-end;
+
+        width: 95%;
+        height: 400px;
+        max-height: 400px;
+
+        overflow-x: hidden;
+        overflow-y: scroll;   
+        
+        /* padding: 20px; */
+    }
+    .users__list > li {
+        width: 480px;
+        max-width: 45%;
+
+        /* min-height: 200px; */
+    }
+
+    /* USER DASHBOARD CSS */
+
+    .user__infos {
+        flex-direction: row;
+
+        gap: 151px;
+    }
+    /* MODALS */
+    .modal > div > h2 {
+        font-size: var(--font-size-2);
+    }
+
+    .department__general {
+        flex-direction: row;
+    }
+
+    .hire__container > select {
+        width: 422px;
+    }
+
+    .hire__container > button {
+        width: 157px;
+        align-self: flex-end;
+    }
+    .modal--small {
+        width: 506px;
+        max-width: 506px;
+    }
+    .modal--medium {
+        width: 733px;
+        max-width: 733px;
+    }
+}

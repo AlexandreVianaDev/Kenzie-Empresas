@@ -1,5 +1,3 @@
-import { acessDashboard } from "./globalScripts.js"
-
 export const baseURL = "http://localhost:6278"
 
 export const { token } = getUser()
@@ -8,7 +6,6 @@ export const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`
 }
-
 
 export const red = ""
 export const green = ""
@@ -125,15 +122,19 @@ export async function login(data) {
         console.log(loginJSON.error)
     }
     else {
-        // const user = {}
-        // user[email] = data
-        // user[token] = loginJSON
+        setUser(loginJSON) // por enquanto passamos só o token pro localStorage
+        window.location.reload()
+
+        // const user = await checkAdmin()
+        // console.log(token)
 
         // console.log(user)
 
-        setUser(loginJSON) // por enquanto passamos só o token pro localStorage
-        // window.location.replace("/src/pages/dashboard.html")
-        acessDashboard()
+        // if(user.is_admin) {
+        //     window.location.replace("/src/pages/dashboardAdmin.html")
+        // } else {
+        //     // window.location.replace("/src/pages/dashboard.html")
+        // }
     }
 
     return loginJSON
@@ -143,4 +144,89 @@ export function setUser(token) {
     const user = localStorage.setItem("@KenzieEmpresas:user", JSON.stringify(token))
 }
 
+export async function getSectors() {
+    const sectors = await fetch(`${baseURL}/sectors`)
 
+    const sectorsJSON = await sectors.json()
+
+    return sectorsJSON
+}
+
+export async function isLogged(){
+    const user = await getUser() // || {}  precisa do ou aqui?
+    
+    if(user.token) {
+        const userIsAdmin = await checkAdmin()  // || {} precisa do ou aqui?
+
+        if(userIsAdmin.is_admin) {
+            // console.log("é adm")
+            return "admin"
+            // window.location.replace("/src/pages/dashboardAdmin.html")
+        } else if (userIsAdmin.is_admin == false){
+            // console.log("n é adm")
+            return "usuario"
+            // window.location.replace("/src/pages/dashboard.html")
+        }
+    }
+    else {
+        return false
+    }
+}
+
+export async function updateProfile(data) {
+    const user = await fetch(`${baseURL}/users`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+
+    const userJSON = await user.json()
+
+    return userJSON
+}
+
+// ADMIN ONLY
+export async function getAllDepartments() {
+    const departments = await fetch(`${baseURL}/departments`, {
+        method: "GET",
+        headers: headers
+    })
+
+    const departmentsJSON = await departments.json()
+
+    return departmentsJSON
+}
+
+export async function getAllDepartmentsFromCompany(uuid) {
+    const departments = await fetch(`${baseURL}/departments/${uuid}`, {
+        method: "GET",
+        headers: headers
+    })
+
+    const departmentsJSON = await departments.json()
+
+    return departmentsJSON
+}
+
+export async function getAllUsers() {
+    const users = await fetch(`${baseURL}/users`, {
+        method: "GET",
+        headers: headers
+    })
+
+    const usersJSON = users.json()
+
+    return usersJSON
+}
+
+export async function createDepartment(data) {
+    const department = await fetch(`${baseURL}/departments`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+
+    const departmentJSON = await department
+
+    return departmentJSON
+}

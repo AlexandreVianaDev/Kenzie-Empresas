@@ -1,6 +1,6 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register } from "./requests.js"
+import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, getSectors } from "./requests.js"
 
-import { menuMobile, acessLogin, acessRegister } from "./globalScripts.js"
+import { menuMobile } from "./globalScripts.js"
 
 async function renderCompanies() {
     const companies = await getCompanies()
@@ -23,11 +23,24 @@ async function renderCompanies() {
     })
 }
 
+async function renderSectorOptions() {
+    const select = document.querySelector("#sectors")
+    const sectors = await getSectors()
+
+    sectors.forEach(sector => {
+        const { description } = sector
+        // console.log(description)
+        select.insertAdjacentHTML("beforeend", `
+            <option value="${description}">${description}</option>
+        `)
+    })
+}
+
 function renderCompaniesBySector() {
     const companiesSelector = document.querySelector("#sectors")
     const companiesList = document.querySelector(".company__list")
 
-    companiesSelector.addEventListener("click", async (event) => {
+    companiesSelector.addEventListener("change", async (event) => {
 
         const companiesBySector = await getCompaniesBySector(event.target.value)
 
@@ -53,9 +66,8 @@ function renderCompaniesBySector() {
 
 function start () {
     menuMobile()
-    acessLogin()
-    acessRegister()
     renderCompanies()
+    renderSectorOptions()
     renderCompaniesBySector()
 }
 

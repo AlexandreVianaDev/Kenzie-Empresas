@@ -11,36 +11,8 @@ export function menuMobile() {
         event.preventDefault()
         // console.log(event.target)
         menuNav.classList.toggle("hidden")
+
+        menuBtn.classList.toggle("fa-bars")
+        menuBtn.classList.toggle("fa-xmark")
     })
-}
-
-export function acessLogin() {
-    const loginBtn = document.querySelector("#loginBtn")
-
-    loginBtn.addEventListener("click", (event) => {
-        event.preventDefault()
-        window.location.replace("/src/pages/login.html")
-    })
-}
-
-export function acessRegister() {
-    const registerBtn = document.querySelector("#registerBtn")
-
-    registerBtn.addEventListener("click", (event) => {
-        event.preventDefault()
-        window.location.replace("/src/pages/register.html")
-    })  
-}
-
-export function acessHome() {
-    const homeBtn = document.querySelector("#homeBtn")
-
-    homeBtn.addEventListener("click", (event) => {
-        event.preventDefault()
-        window.location.replace("/")
-    })  
-}
-
-export function acessDashboard() {
-    window.location.replace("/src/pages/dashboard.html")
 }
