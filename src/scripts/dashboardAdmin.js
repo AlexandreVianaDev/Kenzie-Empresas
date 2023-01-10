@@ -1,4 +1,4 @@
-import { getCompanies, checkAdmin, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, fireUser, editDepartment, deleteDepartment, editUser, deleteUser } from "./requests.js"
+import { getCompanies, checkAdmin, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, editDepartment, deleteDepartment, editUser, deleteUser, fireUser } from "./requests.js"
 
 import { menuMobile } from "./globalScripts.js"
 
@@ -40,29 +40,59 @@ async function renderDepartments() {
         const { name, description, uuid} = department
         const companyName = department.companies.name
 
-        departmentList.insertAdjacentHTML("beforeend", `
-            <li>
-                <div class="department__header">
-                    <h4 class="title-4">${name}</h4>
-                    <p>${description}</p>
-                    <span>${companyName}</span>
-                </div>
-                <div class="department__control">
-                    <i class="fa-regular fa-eye viewDepartment" data-uuid="${uuid}"></i>
-                    <i class="fa-solid fa-pencil editDepartment" data-uuid="${uuid}"></i>
-                    <i class="fa-regular fa-trash-can deleteDepartment" data-uuid="${uuid}"></i>
-                </div>
-            </li>
-        `)
+        const li = document.createElement("li")
+
+        const divHeader = document.createElement("div")
+        divHeader.classList.add("department__header")
+
+        const h4 = document.createElement("h4")
+        h4.classList.add("title-4")
+        h4.innerText = `${name}`
+
+        const p = document.createElement("p")
+        p.innerText = `${description}`
+
+        const span = document.createElement("span")
+        span.innerText = `${companyName}`
+
+        divHeader.append(h4, p, span)
+        li.appendChild(divHeader)
+
+        const divControl = document.createElement("div")
+        divControl.classList.add("department__control")
+
+        const viewBtn = document.createElement("i")
+        viewBtn.setAttribute("class", "fa-regular fa-eye")
+        viewBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            modalViewDepartament(uuid)
+        })
+
+        const editBtn = document.createElement("i")
+        editBtn.setAttribute("class", "fa-solid fa-pencil")
+        editBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            modalEditDepartment(uuid)
+        })
+
+        const deleteBtn = document.createElement("i")
+        deleteBtn.setAttribute("class", "fa-regular fa-trash-can")
+        deleteBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            modalDeleteDepartment(uuid)
+        })
+
+        divControl.append(viewBtn, editBtn, deleteBtn)
+        li.appendChild(divControl)
+
+        departmentList.appendChild(li)
     })
 
-    prepareDepartmentButtons()
 }
 
 async function renderDepartmentsFromCompany(uuid) {
     const departments = await getAllDepartmentsFromCompany(uuid)
     const departmentList = document.querySelector(".department__list")
-    const main = document.querySelector("main")
 
     departmentList.innerHTML = ""
 
@@ -70,21 +100,53 @@ async function renderDepartmentsFromCompany(uuid) {
         departments.forEach(department => {
             const { name, description, uuid} = department
             const companyName = department.companies.name
-    
-            departmentList.insertAdjacentHTML("beforeend", `
-                <li>
-                    <div class="department__header">
-                        <h4 class="title-4">${name}</h4>
-                        <p>${description}</p>
-                        <span>${companyName}</span>
-                    </div>
-                    <div class="department__control">
-                        <i class="fa-regular fa-eye viewDepartment" data-uuid="${uuid}"></i>
-                        <i class="fa-solid fa-pencil editDepartment" data-uuid="${uuid}"></i>
-                        <i class="fa-regular fa-trash-can deleteDepartment" data-uuid="${uuid}"></i>
-                    </div>
-                </li>
-            `)
+
+            const li = document.createElement("li")
+
+            const divHeader = document.createElement("div")
+            divHeader.classList.add("department__header")
+
+            const h4 = document.createElement("h4")
+            h4.classList.add("title-4")
+            h4.innerText = `${name}`
+
+            const p = document.createElement("p")
+            p.innerText = `${description}`
+
+            const span = document.createElement("span")
+            span.innerText = `${companyName}`
+
+            divHeader.append(h4, p, span)
+            li.appendChild(divHeader)
+
+            const divControl = document.createElement("div")
+            divControl.classList.add("department__control")
+
+            const viewBtn = document.createElement("i")
+            viewBtn.setAttribute("class", "fa-regular fa-eye")
+            viewBtn.addEventListener("click", (event) => {
+                event.preventDefault()
+                modalViewDepartament(uuid)
+            })
+
+            const editBtn = document.createElement("i")
+            editBtn.setAttribute("class", "fa-solid fa-pencil")
+            editBtn.addEventListener("click", (event) => {
+                event.preventDefault()
+                modalEditDepartment(uuid)
+            })
+
+            const deleteBtn = document.createElement("i")
+            deleteBtn.setAttribute("class", "fa-regular fa-trash-can")
+            deleteBtn.addEventListener("click", (event) => {
+                event.preventDefault()
+                modalDeleteDepartment(uuid)
+            })
+
+            divControl.append(viewBtn, editBtn, deleteBtn)
+            li.appendChild(divControl)
+
+            departmentList.appendChild(li)
         })
     } else {
         departmentList.insertAdjacentHTML("beforeend", `
@@ -93,37 +155,6 @@ async function renderDepartmentsFromCompany(uuid) {
             </li>
         `)
     }
-    prepareDepartmentButtons()
-}
-
-async function prepareDepartmentButtons() {
-    const viewDepartmentBtns = document.querySelectorAll(".viewDepartment")
-    const editDepartmentBtns = document.querySelectorAll(".editDepartment")
-    const deleteDepartmentBtns = document.querySelectorAll(".deleteDepartment")
-
-    viewDepartmentBtns.forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault()
-            const uuid = event.target.dataset.uuid
-            modalViewDepartament(uuid)
-        })
-    })
-
-    editDepartmentBtns.forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault()
-            const uuid = event.target.dataset.uuid
-            modalEditDepartment(uuid)
-        })
-    })
-
-    deleteDepartmentBtns.forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault()
-            const uuid = event.target.dataset.uuid
-            modalDeleteDepartment(uuid)
-        })
-    })
 }
 
 async function modalDeleteDepartment(uuid) {
@@ -156,8 +187,6 @@ async function modalDeleteDepartment(uuid) {
     deleteBtn.addEventListener("click", (event) => {
         event.preventDefault()
         deleteDepartment(uuid)
-        // modal.close()
-        // window.location.reload()
     })
 
     modal.showModal()
@@ -243,52 +272,36 @@ async function renderUsers() {
 
             li.appendChild(divHeader)
 
-            li.insertAdjacentHTML("beforeend", `
-                <div class="user__control">
-                    <i class="fa-solid fa-pencil editUser" data-uuid="${uuid}"></i>
-                    <i class="fa-regular fa-trash-can deleteUser"  data-uuid="${uuid}"></i>
-                </div>
-            `)
+            const div = document.createElement("div")
+            div.classList.add("user__control")
 
+            const iEditUser = document.createElement("i")
+            iEditUser.classList.add("fa-solid")
+            iEditUser.classList.add("fa-pencil")
+
+            iEditUser.addEventListener("click", (event) => {
+                event.preventDefault()
+                modalEditUser(uuid)
+            })
+
+            const iDeleteUser = document.createElement("i")
+            iDeleteUser.classList.add("fa-regular")
+            iDeleteUser.classList.add("fa-trash-can")
+
+            iDeleteUser.addEventListener("click", (event) => {
+                event.preventDefault()
+                modalDeleteUser(uuid)
+            })
+
+            div.append(iEditUser, iDeleteUser)
+            li.appendChild(div)
             usersList.appendChild(li)
         }
-    })
-
-    // prepareUsersButtons()
-    setTimeout(() => { prepareUsersButtons() }, 500)
-}
-
-async function prepareUsersButtons() {
-    const editUserBtns = document.querySelectorAll(".editUser")
-    const deleteUserBtns  = document.querySelectorAll(".deleteUser")
-
-    console.log(editUserBtns)
-    console.log(deleteUserBtns)
-
-
-    editUserBtns.forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault()
-            const uuid = event.target.dataset.uuid
-            modalEditUser(uuid)
-        })
-    })
-
-    deleteUserBtns.forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault()
-            const uuid = event.target.dataset.uuid
-            modalDeleteUser(uuid)
-        })
     })
 }
 
 function modalEditUser(uuid) {
     const modal = document.querySelector("dialog")
-    // const users = await getAllUsers();
-    // const user = users.find(user => user.uuid == uuid)
-
-    // const { professional_level, kind_of_work} = user
 
     modal.classList.remove("modal--big")
     modal.classList.remove("modal--medium")
@@ -338,6 +351,7 @@ function modalEditUser(uuid) {
         if(professionalLevelInput.value){
             data.professional_level = professionalLevelInput.value
         }
+        editUser(data,uuid)
     })
 
     modal.showModal()
@@ -373,13 +387,11 @@ async function modalDeleteUser(uuid) {
     deleteBtn.addEventListener("click", (event) => {
         event.preventDefault()
         deleteUser(uuid)
-        // modal.close()
-        // window.location.reload()
     })
     modal.showModal()
 }
 
-async function modalViewDepartament(uuid) {
+export async function modalViewDepartament(uuid) {
     const modal = document.querySelector("dialog")
 
     modal.classList.remove("modal--small")
@@ -444,8 +456,9 @@ async function modalViewDepartament(uuid) {
             user_uuid: select.value,
             department_uuid: uuid
         }
-
         hireUser(data)
+        modal.close()
+        modalViewDepartament(uuid)
     })
 
     const departmentUsersList = document.querySelector(".department__users--list")
@@ -487,7 +500,8 @@ async function modalViewDepartament(uuid) {
         button.addEventListener("click", (event) => {
             event.preventDefault()
             fireUser(event.target.dataset.uuid)
-
+            modal.close()
+            modalViewDepartament(uuid)
         })
     })
 

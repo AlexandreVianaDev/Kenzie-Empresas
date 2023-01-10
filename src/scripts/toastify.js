@@ -2,7 +2,7 @@ export function callToastify(text, color) {
     Toastify({
 
         text: text,
-        duration: 1000,
+        duration: 2000,
         position: "center",
         style: {
             background: color,

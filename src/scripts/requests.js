@@ -94,9 +94,12 @@ export async function userCoworkers() {
 
     const coworkersJSON = await coworkers.json()
 
-    const coworkersList = await coworkersJSON[0].users
+    if(coworkersJSON.length > 0) {
+        const coworkersList = await coworkersJSON[0].users
+        return coworkersList
+    }
 
-    return coworkersList
+    return coworkersJSON
 }
 
 export async function login(data) {
@@ -246,13 +249,14 @@ export async function hireUser(data) {
         callToastify("Erro ao contratar",red)
     } else {
         callToastify("Usuário contratado",green)
-        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
     }
 
     return userJSON
 }
 
 export async function fireUser(uuid) {
+    const modal = document.querySelector("dialog")
+
     const user = await fetch(`${baseURL}/departments/dismiss/${uuid}`, {
         method:"PATCH",
         headers: headers
@@ -264,9 +268,7 @@ export async function fireUser(uuid) {
         callToastify("Erro ao demitir",red)
     } else {
         callToastify("Usuário demitido",green)
-        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
     }
-
     return userJSON
 }
 
@@ -316,7 +318,7 @@ export async function editUser(data, uuid) {
         callToastify("Erro ao atualizar usuário",red)
     } else {
         callToastify("Usuário atualizado",green)
-        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+        setTimeout(() => {window.location.reload()}, 1100)
     }
 
     return userJSON
