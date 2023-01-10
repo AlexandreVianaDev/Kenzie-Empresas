@@ -48,14 +48,9 @@ export async function register(data) {
         body: JSON.stringify(data)
     })
 
-    console.log(data)
-    console.log(register)
-
     const registerJSON = await register.json()
 
     if(!register.ok) {
-        // CHAMAR TOASTIFY AQUI
-        // console.log(registerJSON.error[0])
         callToastify("O email já está registrado",red)
     } else {
         window.location.replace("/src/pages/login.html")
@@ -97,13 +92,9 @@ export async function userCoworkers() {
         headers: headers
     })
 
-    // console.log(coworkers)
-
     const coworkersJSON = await coworkers.json()
 
     const coworkersList = await coworkersJSON[0].users
-
-    // console.log(coworkersJSON[0].users)
 
     return coworkersList
 }
@@ -117,27 +108,13 @@ export async function login(data) {
 
     const loginJSON = await login.json()
 
-    console.log(loginJSON)
-
 
     if(!login.ok) {
-        // console.log(loginJSON.error)
         callToastify("Email ou senha incorretos",red)
     }
     else {
         setUser(loginJSON) // por enquanto passamos só o token pro localStorage
         window.location.reload()
-
-        // const user = await checkAdmin()
-        // console.log(token)
-
-        // console.log(user)
-
-        // if(user.is_admin) {
-        //     window.location.replace("/src/pages/dashboardAdmin.html")
-        // } else {
-        //     // window.location.replace("/src/pages/dashboard.html")
-        // }
     }
 
     return loginJSON
@@ -156,19 +133,15 @@ export async function getSectors() {
 }
 
 export async function isLogged(){
-    const user = await getUser() // || {}  precisa do ou aqui?
+    const user = await getUser()
     
     if(user.token) {
-        const userIsAdmin = await checkAdmin()  // || {} precisa do ou aqui?
+        const userIsAdmin = await checkAdmin() 
 
         if(userIsAdmin.is_admin) {
-            // console.log("é adm")
             return "admin"
-            // window.location.replace("/src/pages/dashboardAdmin.html")
         } else if (userIsAdmin.is_admin == false){
-            // console.log("n é adm")
             return "usuario"
-            // window.location.replace("/src/pages/dashboard.html")
         }
     }
     else {
@@ -186,7 +159,6 @@ export async function updateProfile(data) {
     const userJSON = await user.json()
 
     if(!user.ok) {
-        console.log(userJSON)
         callToastify("Erro ao atualizar perfil",red)
     } else {
         callToastify("Perfil atualizado",green)
@@ -241,7 +213,6 @@ export async function createDepartment(data) {
     const departmentJSON = await department
 
     if(!department.ok) {
-        console.log(departmentJSON)
         callToastify("Erro ao criar departamento",red)
     } else {
         callToastify("Departamento criado",green)
@@ -272,7 +243,6 @@ export async function hireUser(data) {
     const userJSON = await user.json()
 
     if(!user.ok) {
-        console.log(userJSON)
         callToastify("Erro ao contratar",red)
     } else {
         callToastify("Usuário contratado",green)
@@ -291,7 +261,6 @@ export async function fireUser(uuid) {
     const userJSON = await user.json()
 
     if(!user.ok) {
-        console.log(userJSON)
         callToastify("Erro ao demitir",red)
     } else {
         callToastify("Usuário demitido",green)
@@ -311,7 +280,6 @@ export async function editDepartment(data, uuid) {
     const departmentJSON = await department
 
     if(!department.ok) {
-        console.log(departmentJSON)
         callToastify("Erro ao atualizar departamento",red)
     } else {
         callToastify("Departamento atualizado",green)
@@ -327,16 +295,12 @@ export async function deleteDepartment(uuid) {
         headers: headers
     })
 
-    // const departmentJSON = await department.json()
-
     if(!department.ok) {
         callToastify("Erro ao deletar departamento",red)
     } else {
         callToastify("Departamento deletado",green)
         setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
     }
-
-    // return departmentJSON
 }
 
 export async function editUser(data, uuid) {

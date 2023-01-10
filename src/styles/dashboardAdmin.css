@@ -75,13 +75,16 @@ body > .container {
     border-radius: 15px;
     border: 1px solid var(--color-black);
 
-    padding: 8px 24px;
+    padding: 4px 24px;
 }
 
 .section1__header > button {
     padding: 8px 24px;
 
     position: relative;
+
+    min-width: 150px;
+    min-height: 48px;
 }
 
 .section1__header > button > i {
@@ -104,6 +107,7 @@ body > .container {
     gap: 30px;
 
     min-width: 240px;
+    height: fit-content;
     /* min-height: 212px; */
 
     border-bottom: 1px solid var(--color-brand-1);
@@ -180,10 +184,6 @@ body > .container {
     padding-bottom: 12px;
 }
 
-.user__control > i {
-    font-size: 26px;
-}
-
 .user__control > i:hover {
     cursor: pointer;
     color: var(--color-brand-1);
@@ -218,8 +218,6 @@ body > .container {
 }
 
 .user__section--1 > i {
-    font-size: 26px;
-
     position: absolute;
     top: 4px;
     right: 8px;
@@ -230,8 +228,6 @@ body > .container {
 
     color: var(--color-brand-1);
 }
-
-/* USER WITHOUT JOB */
 
 .department--no {
     width: 100%;
@@ -253,6 +249,8 @@ body > .container {
     line-height: var(--line-heigth-1);
 
     padding: 12px;
+
+    text-align: center;
 }
 
 /* USER WITH JOB */
@@ -308,7 +306,6 @@ body > .container {
 }
 
 .modal > div > i {
-    font-size: 26px;
 
     position: absolute;
     top: 20px;
@@ -365,11 +362,11 @@ body > .container {
     
     max-width: 422px;
 
-    padding: 8px 16px;
+    padding: 16px 16px;
 }
 
 .hire__container > button {
-    padding: 8px 16px;   
+    padding: 12px 16px;   
 
     max-width: 422px;
 }
@@ -395,11 +392,14 @@ body > .container {
     gap: 10px;
 
     min-width: 240px;
+    max-width: 240px;
     /* min-height: 212px; */
 
     border-bottom: 1px solid var(--color-brand-1);
 
     padding: 12px;
+
+    margin-bottom: 40px;
 }
 .department__users--list > li > button {
     max-width: 157px;
@@ -407,6 +407,7 @@ body > .container {
     padding: 12px 26px;
 
     align-self: center;
+    margin-top: auto;
 }
 
 .modal--small {

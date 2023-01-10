@@ -29,11 +29,6 @@ function registerForm() {
 
         register(data)
     })
-
-    // console.log(inputs)
-    // console.log(select)
-    // console.log(registerBtn)
-    // console.log(returnBtn)
 }
 
 

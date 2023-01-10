@@ -9,7 +9,6 @@ export function menuMobile() {
 
     menuBtn.addEventListener("click", (event)=> {
         event.preventDefault()
-        // console.log(event.target)
         menuNav.classList.toggle("hidden")
 
         menuBtn.classList.toggle("fa-bars")

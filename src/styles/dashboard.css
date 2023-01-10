@@ -183,11 +183,11 @@ body > .container {
 .user__control > i {
     font-size: 26px;
 }
-
+/* 
 .user__control > i:hover {
     cursor: pointer;
     color: var(--color-brand-1);
-}
+} */
 
 /* USER DASHBOARD CSS */
 
@@ -218,11 +218,9 @@ body > .container {
 }
 
 .user__section--1 > i {
-    font-size: 26px;
-
     position: absolute;
-    top: 4px;
-    right: 8px;
+    top: 10px;
+    right: 10px;
 }
 
 .user__section--1 > i:hover {
@@ -306,8 +304,6 @@ body > .container {
 }
 
 .modal > div > i {
-    font-size: 26px;
-
     position: absolute;
     top: 20px;
     right: 20px;

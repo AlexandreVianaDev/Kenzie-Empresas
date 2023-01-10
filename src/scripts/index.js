@@ -8,7 +8,6 @@ async function renderCompanies() {
     const companiesList = document.querySelector(".company__list")
 
     companies.forEach(company => {
-        // console.log(company)
         const { name, opening_hours } = company
         const { description } = company.sectors
         companiesList.insertAdjacentHTML("beforeend", `
@@ -29,7 +28,6 @@ async function renderSectorOptions() {
 
     sectors.forEach(sector => {
         const { description } = sector
-        // console.log(description)
         select.insertAdjacentHTML("beforeend", `
             <option value="${description}">${description}</option>
         `)
@@ -47,7 +45,6 @@ function renderCompaniesBySector() {
         companiesList.innerHTML = ""
 
         companiesBySector.forEach(company => {
-            // console.log(company)
             const { name, opening_hours } = company
             const { description } = company.sectors
             companiesList.insertAdjacentHTML("beforeend", `

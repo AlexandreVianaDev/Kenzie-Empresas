@@ -30,8 +30,6 @@ function loginForm() {
             data[input.id] = input.value
         })
 
-        console.log(data)
-
         login(data)
     })
 }

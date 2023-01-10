@@ -181,6 +181,29 @@ button {
   display: none !important;
 }
 
+/* FONT AWESOME */
+
+.fa-eye {
+  font-size: 30px;
+}
+
+.fa-pencil {
+  font-size: 26px;
+}
+
+.fa-trash-can {
+  font-size: 26px;
+}
+
+.fa-xmark, .fa-plus {
+  font-size: 24px;
+}
+
+.fa-eye:hover, .fa-pencil:hover, .fa-trash-can:hover, .fa-xmark:hover, .fa-plus:hover {
+  cursor: pointer;
+  color: var(--color-brand-1);
+}
+
 /* SCROLLBARS */
 
 /* CHROME */

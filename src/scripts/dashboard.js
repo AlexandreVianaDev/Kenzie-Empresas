@@ -113,10 +113,6 @@ async function openModal () {
 
     const user = await getUserInfo()
 
-    // inputs.forEach(input => {
-    //     input.value = user[input.id]
-    // })
-
     editBtn.addEventListener("click", (event) => {
         event.preventDefault()
         modalEditProfile.showModal()
@@ -136,7 +132,6 @@ async function openModal () {
             }
         })
         updateProfile(data)
-        // window.location.replace("/src/pages/dashboard.html")
     })
 }
 

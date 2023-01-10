@@ -22,19 +22,14 @@ async function renderCompanies() {
 
     companies.forEach(company => {
         const { name, uuid } = company
-        // console.log(company)
         select.insertAdjacentHTML("beforeend", `
             <option value="${uuid}">${name}</option>
         `)
     })
 
     select.addEventListener("change", (event) => {
-        // console.log(select.value)
         renderDepartmentsFromCompany(select.value)
     })
-
-    // console.log(companies)
-
 }
 
 async function renderDepartments() {
@@ -68,7 +63,6 @@ async function renderDepartmentsFromCompany(uuid) {
     const departments = await getAllDepartmentsFromCompany(uuid)
     const departmentList = document.querySelector(".department__list")
     const main = document.querySelector("main")
-    // console.log(departments)
 
     departmentList.innerHTML = ""
 
@@ -93,7 +87,6 @@ async function renderDepartmentsFromCompany(uuid) {
             `)
         })
     } else {
-        // console.log("a")
         departmentList.insertAdjacentHTML("beforeend", `
             <li class="department--no">
                 <h2>A empresa ainda não possui departamentos</h2>
@@ -112,7 +105,6 @@ async function prepareDepartmentButtons() {
         btn.addEventListener("click", (event) => {
             event.preventDefault()
             const uuid = event.target.dataset.uuid
-            // console.log(uuid)
             modalViewDepartament(uuid)
         })
     })
@@ -120,7 +112,6 @@ async function prepareDepartmentButtons() {
     editDepartmentBtns.forEach(btn => {
         btn.addEventListener("click", (event) => {
             event.preventDefault()
-            // console.log(event.target.dataset.uuid)
             const uuid = event.target.dataset.uuid
             modalEditDepartment(uuid)
         })
@@ -129,14 +120,10 @@ async function prepareDepartmentButtons() {
     deleteDepartmentBtns.forEach(btn => {
         btn.addEventListener("click", (event) => {
             event.preventDefault()
-            console.log(event.target.dataset.uuid)
             const uuid = event.target.dataset.uuid
             modalDeleteDepartment(uuid)
         })
     })
-
-    // console.log(viewDepartmentBtns)
-
 }
 
 async function modalDeleteDepartment(uuid) {
@@ -213,13 +200,8 @@ async function modalEditDepartment(uuid) {
         const data = {
             description: input.value
         }
-        console.log(event.target)
         editDepartment(data,uuid)
-        // modal.close()
     })
-
-    console.log(department.description)
-    console.log(modal)
 
     modal.showModal()
 }
@@ -228,8 +210,6 @@ async function renderUsers() {
     const users = await getAllUsers();
     const usersList = document.querySelector(".users__list")
 
-    // console.log(users)
-    // console.log(usersList)
     users.forEach(async user => {
 
         const { username, professional_level, department_uuid, uuid } = user
@@ -249,7 +229,6 @@ async function renderUsers() {
 
             const spanProfessional = document.createElement("span")
             if (professional_level) {
-                // console.log(professional_level)
                 spanProfessional.innerText = `${professional_level}`
                 divHeader.appendChild(spanProfessional)
             }
@@ -274,18 +253,23 @@ async function renderUsers() {
             usersList.appendChild(li)
         }
     })
-    prepareUsersButtons()
+
+    // prepareUsersButtons()
+    setTimeout(() => { prepareUsersButtons() }, 500)
 }
 
-function prepareUsersButtons() {
+async function prepareUsersButtons() {
     const editUserBtns = document.querySelectorAll(".editUser")
     const deleteUserBtns  = document.querySelectorAll(".deleteUser")
+
+    console.log(editUserBtns)
+    console.log(deleteUserBtns)
+
 
     editUserBtns.forEach(btn => {
         btn.addEventListener("click", (event) => {
             event.preventDefault()
             const uuid = event.target.dataset.uuid
-            // console.log(uuid)
             modalEditUser(uuid)
         })
     })
@@ -293,7 +277,6 @@ function prepareUsersButtons() {
     deleteUserBtns.forEach(btn => {
         btn.addEventListener("click", (event) => {
             event.preventDefault()
-            // console.log(event.target.dataset.uuid)
             const uuid = event.target.dataset.uuid
             modalDeleteUser(uuid)
         })
@@ -345,7 +328,6 @@ function modalEditUser(uuid) {
     const editBtn = document.querySelector("#editBtn")
     editBtn.addEventListener("click", (event) => {
         event.preventDefault()
-        console.log(event.target)
         const kindOfWorkInput = document.querySelector("#kind_of_work")
         const professionalLevelInput = document.querySelector("#professional_level")
         const data = {}
@@ -356,10 +338,6 @@ function modalEditUser(uuid) {
         if(professionalLevelInput.value){
             data.professional_level = professionalLevelInput.value
         }
-        console.log(data)
-        console.log(editUser(data,uuid))
-        // modal.close()
-        // window.location.reload()
     })
 
     modal.showModal()
@@ -415,8 +393,6 @@ async function modalViewDepartament(uuid) {
     const { name,  description } = department
     const companyName = department.companies.name
 
-    console.log(department)
-
     modal.innerHTML = ""
 
     modal.insertAdjacentHTML("beforeend", `
@@ -453,7 +429,6 @@ async function modalViewDepartament(uuid) {
     const usersWithoutJob = await getUsersWithoutJob()
 
     usersWithoutJob.forEach(user => {
-        // console.log(user)
         const { username, uuid } = user
 
         select.insertAdjacentHTML("beforeend", `
@@ -511,7 +486,6 @@ async function modalViewDepartament(uuid) {
     fireBtns.forEach(button => {
         button.addEventListener("click", (event) => {
             event.preventDefault()
-            // console.log(event.target.dataset.uuid)
             fireUser(event.target.dataset.uuid)
 
         })
@@ -524,11 +498,9 @@ async function modalCreateDepartment() {
     const modal = document.querySelector("dialog")
     const createBtn = document.querySelector("#createBtn")
 
-    // console.log(createBtn)
 
     createBtn.addEventListener("click", async (event) => {
         event.preventDefault()
-        // console.log(event.target)
 
         modal.classList.remove("modal--big")
         modal.classList.remove("modal--medium")
@@ -561,10 +533,6 @@ async function modalCreateDepartment() {
             `)
         })
 
-        select.addEventListener("change", (event) => {
-            console.log(select.value)
-        })
-
         const createDepartmentBtn = document.querySelector("#createDepartmentBtn")
 
         createDepartmentBtn.addEventListener("click", (event) => {
@@ -580,11 +548,7 @@ async function modalCreateDepartment() {
 
             data.company_uuid = select.value
 
-
-            console.log(data)
-            createDepartment(data)
-            // modal.close()
-            // location.reload()
+            createDepartment(data)            
         })
 
         const closeBtn = document.querySelector("#closeBtn")
@@ -619,7 +583,6 @@ function start() {
     renderAdmin()
     logout()
     modalCreateDepartment()
-    // modalViewDepartament()
 }
 
 start()

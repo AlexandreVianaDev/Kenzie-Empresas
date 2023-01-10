@@ -54,7 +54,7 @@ header > .container > nav > a > button {
 }
 
 body > .container {
-    padding-top: 120px;
+    padding-top: 80px;
 }
 
 .section-1 {
@@ -173,6 +173,9 @@ body > .container {
 
 
 @media screen and (min-width: 769px) {
+    body > .container {
+        padding-top: 120px;
+    }
     header > .container {
         flex-direction: row;
     }
