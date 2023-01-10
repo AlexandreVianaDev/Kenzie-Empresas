@@ -1,4 +1,4 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, fireUser } from "./requests.js"
+import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, fireUser, editDepartment, deleteDepartment, editUser, deleteUser } from "./requests.js"
 
 import { menuMobile } from "./globalScripts.js"
 
@@ -117,8 +117,111 @@ async function prepareDepartmentButtons() {
         })
     })
 
+    editDepartmentBtns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault()
+            // console.log(event.target.dataset.uuid)
+            const uuid = event.target.dataset.uuid
+            modalEditDepartment(uuid)
+        })
+    })
+
+    deleteDepartmentBtns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault()
+            console.log(event.target.dataset.uuid)
+            const uuid = event.target.dataset.uuid
+            modalDeleteDepartment(uuid)
+        })
+    })
+
     // console.log(viewDepartmentBtns)
 
+}
+
+async function modalDeleteDepartment(uuid) {
+    const departments = await getAllDepartments()
+    const department = departments.find(department => department.uuid == uuid)
+    const { name } = department
+
+    const modal = document.querySelector("dialog")
+    modal.classList.remove("modal--big")
+    modal.classList.remove("modal--small")
+    modal.classList.add("modal--medium")
+
+    modal.innerHTML = ""
+
+    modal.insertAdjacentHTML("beforeend",`
+        <div>
+            <i class="fa-solid fa-xmark" id="closeBtn"></i>
+            <h3>Realmente deseja deletar o departamento ${name} e demitir seus funcionários?</h3>
+            <button class="button-green" id="deleteBtn">Confirmar</button>
+        </div>
+    `)
+
+    const closeBtn = document.querySelector("#closeBtn")
+    closeBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modal.close()
+    })
+
+    const deleteBtn = document.querySelector("#deleteBtn")
+    deleteBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        deleteDepartment(uuid)
+        modal.close()
+        window.location.reload()
+    })
+
+    modal.showModal()
+}
+
+async function modalEditDepartment(uuid) {
+    const departments = await getAllDepartments()
+    const department = departments.find(department => department.uuid == uuid)
+    const { description } = department
+
+
+    const modal = document.querySelector("dialog")
+    modal.classList.remove("modal--big")
+    modal.classList.remove("modal--medium")
+    modal.classList.add("modal--small")
+
+    modal.innerHTML = ""
+
+    modal.insertAdjacentHTML("beforeend",`
+        <div>
+            <i class="fa-solid fa-xmark" id="closeBtn"></i>
+            <h2 class="title-2">Editar departamento</h2>
+            <form>
+                <textarea name="departament__description" id="departament__description" cols="30" rows="10" placeholder="Valores anteriores da descrição">${description}</textarea>
+                <button class="button-blue" id="saveBtn">Salvar alterações</button>
+            </form>
+        </div>
+    `)
+
+    const closeBtn = document.querySelector("#closeBtn")
+    closeBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modal.close()
+    })
+
+    const saveBtn = document.querySelector("#saveBtn")
+    saveBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        const input = document.querySelector("#departament__description")
+        const data = {
+            description: input.value
+        }
+        console.log(event.target)
+        editDepartment(data,uuid)
+        modal.close()
+    })
+
+    console.log(department.description)
+    console.log(modal)
+
+    modal.showModal()
 }
 
 async function renderUsers() {
@@ -129,7 +232,7 @@ async function renderUsers() {
     // console.log(usersList)
     users.forEach(async user => {
 
-        const { username, professional_level, department_uuid } = user
+        const { username, professional_level, department_uuid, uuid } = user
 
         if(!user.is_admin) {
             const li = document.createElement("li")
@@ -163,35 +266,139 @@ async function renderUsers() {
 
             li.insertAdjacentHTML("beforeend", `
                 <div class="user__control">
-                    <i class="fa-solid fa-pencil"></i>
-                    <i class="fa-regular fa-trash-can"></i>
+                    <i class="fa-solid fa-pencil editUser" data-uuid="${uuid}"></i>
+                    <i class="fa-regular fa-trash-can deleteUser"  data-uuid="${uuid}"></i>
                 </div>
             `)
 
             usersList.appendChild(li)
-
-
-            
-
-            // usersList.insertAdjacentHTML("beforeend", `
-            //     <li>
-            //         <div class="user__header">
-            //             <h4 class="title-4">${username}</h4>
-            //             <span>${professional_level}</span>
-            //             <span>${department_uuid}</span>
-            //         </div>
-            //         <div class="user__control">
-            //             <i class="fa-solid fa-pencil"></i>
-            //             <i class="fa-regular fa-trash-can"></i>
-            //         </div>
-            //     </li>
-            // `)
-            // if(user.department_uuid) {
-            //     const userHeader = 
-            //     console.log("a")
-            // }
         }
     })
+    prepareUsersButtons()
+}
+
+function prepareUsersButtons() {
+    const editUserBtns = document.querySelectorAll(".editUser")
+    const deleteUserBtns  = document.querySelectorAll(".deleteUser")
+
+    editUserBtns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault()
+            const uuid = event.target.dataset.uuid
+            // console.log(uuid)
+            modalEditUser(uuid)
+        })
+    })
+
+    deleteUserBtns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault()
+            // console.log(event.target.dataset.uuid)
+            const uuid = event.target.dataset.uuid
+            modalDeleteUser(uuid)
+        })
+    })
+}
+
+function modalEditUser(uuid) {
+    const modal = document.querySelector("dialog")
+    // const users = await getAllUsers();
+    // const user = users.find(user => user.uuid == uuid)
+
+    // const { professional_level, kind_of_work} = user
+
+    modal.classList.remove("modal--big")
+    modal.classList.remove("modal--medium")
+    modal.classList.add("modal--small")
+
+    modal.innerHTML = ""
+
+    modal.insertAdjacentHTML("beforeend", `
+        <div>
+            <i class="fa-solid fa-xmark" id="closeBtn"></i>
+            <h2 class="title-2">Editar Usuário</h2>
+            <form>
+                <select name="kind_of_work" id="kind_of_work" class="text-2">
+                    <option value="">Selecionar modalidade de trabalho</option>
+                    <option value="home office" class="text-2">Home Office</option>
+                    <option value="presencial" class="text-2">Presencial</option>
+                    <option value="hibrido" class="text-2">Híbrido</option>
+                </select>
+                <select name="professional_level" id="professional_level" class="text-2">
+                    <option value="">Selecionar nível profissional</option>
+                    <option value="estágio" class="text-2">Estágio</option>
+                    <option value="júnior" class="text-2">Júnior</option>
+                    <option value="pleno" class="text-2">Pleno</option>
+                    <option value="sênior" class="text-2">Sênior</option>
+                </select>
+                <button class="button-blue" id="editBtn">Editar</button>
+            </form>
+        </div>
+    `)
+
+    const closeBtn = document.querySelector("#closeBtn")
+    closeBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modal.close()
+    })
+
+    const editBtn = document.querySelector("#editBtn")
+    editBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        console.log(event.target)
+        const kindOfWorkInput = document.querySelector("#kind_of_work")
+        const professionalLevelInput = document.querySelector("#professional_level")
+        const data = {}
+
+        if (kindOfWorkInput.value) {
+            data.kind_of_work = kindOfWorkInput.value
+        }
+        if(professionalLevelInput.value){
+            data.professional_level = professionalLevelInput.value
+        }
+        console.log(data)
+        console.log(editUser(data,uuid))
+        modal.close()
+        window.location.reload()
+    })
+
+    modal.showModal()
+}
+
+async function modalDeleteUser(uuid) {
+    const modal = document.querySelector("dialog")
+    const users = await getAllUsers();
+    const user = users.find(user => user.uuid == uuid)
+    const { username } = user
+
+    modal.classList.remove("modal--big")
+    modal.classList.remove("modal--small")
+    modal.classList.add("modal--medium")
+
+    modal.innerHTML = ""
+
+    modal.insertAdjacentHTML("beforeend", `
+    <div>
+        <i class="fa-solid fa-xmark" id="closeBtn"></i>
+        <h3>Realmente deseja remover o usuário ${username}?</h3>
+        <button class="button-green" id="deleteBtn">Deletar</button>
+    </div>
+    `)
+
+    const closeBtn = document.querySelector("#closeBtn")
+    closeBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        modal.close()
+    })
+
+    const deleteBtn = document.querySelector("#deleteBtn")
+    deleteBtn.addEventListener("click", (event) => {
+        event.preventDefault()
+        deleteUser(uuid)
+        modal.close()
+        window.location.reload()
+    })
+    modal.showModal()
 }
 
 async function modalViewDepartament(uuid) {
@@ -389,9 +596,7 @@ async function modalCreateDepartment() {
         })
 
         modal.showModal()
-    })
-
-    
+    }) 
 }
 
 function logout() {
@@ -420,45 +625,3 @@ function start() {
 }
 
 start()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const modalDepartament = document.querySelector(".modal__departament--control")
-
-
-
-const modalEditDepartament = document.querySelector(".modal__departament--edit")
-
-const modalEditUser = document.querySelector(".modal__user--edit")
-
-const modalWarningUserRemove = document.querySelector(".modal__warning--user-remove")
-
-const modalWarningDepartamentRemove = document.querySelector(".modal__warning--departament-remove")
-
-const modalEditProfile = document.querySelector(".modal__profile--edit")
-
-// modalDepartament.showModal()
-
-// modalCreateDepartament.showModal()
-
-// modalEditDepartament.showModal()
-
-// modalEditUser.showModal()
-
-// modalWarningUserRemove.showModal()
-
-// modalWarningDepartamentRemove.showModal()
-
-// modalEditProfile.showModal()

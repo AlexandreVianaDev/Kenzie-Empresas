@@ -260,3 +260,46 @@ export async function fireUser(uuid) {
         headers: headers
     })
 }
+
+export async function editDepartment(data, uuid) {
+    const department = await fetch(`${baseURL}/departments/${uuid}`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+
+    const departmentJSON = await department
+
+    return departmentJSON
+}
+
+
+export async function deleteDepartment(uuid) {
+    const department = await fetch(`${baseURL}/departments/${uuid}`, {
+        method: "DELETE",
+        headers: headers
+    })
+}
+
+export async function editUser(data, uuid) {
+    const user = await fetch(`${baseURL}/admin/update_user/${uuid}`,{
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+
+    const userJSON = await user.json()
+
+    return userJSON
+}
+
+export async function deleteUser(uuid) {
+    const user = await fetch(`${baseURL}/admin/delete_user/${uuid}`, {
+        method:"DELETE",
+        headers: headers
+    })
+
+    const userJSON = await user.json()
+
+    return userJSON
+}
