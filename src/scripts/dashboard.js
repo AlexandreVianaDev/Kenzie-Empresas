@@ -1,4 +1,4 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, updateProfile } from "./requests.js"
+import { getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, updateProfile } from "./requests.js"
 
 import { menuMobile } from "./globalScripts.js"
 
@@ -113,9 +113,9 @@ async function openModal () {
 
     const user = await getUserInfo()
 
-    inputs.forEach(input => {
-        input.value = user[input.id]
-    })
+    // inputs.forEach(input => {
+    //     input.value = user[input.id]
+    // })
 
     editBtn.addEventListener("click", (event) => {
         event.preventDefault()
@@ -135,9 +135,8 @@ async function openModal () {
                 data[input.id] = input.value
             }
         })
-        console.log(data)
         updateProfile(data)
-        window.location.replace("/src/pages/dashboard.html")
+        // window.location.replace("/src/pages/dashboard.html")
     })
 }
 

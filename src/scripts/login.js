@@ -1,4 +1,4 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, isLogged } from "./requests.js"
+import { login, isLogged } from "./requests.js"
 
 import { menuMobile } from "./globalScripts.js"
 

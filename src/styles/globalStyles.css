@@ -180,3 +180,22 @@ button {
 .hidden {
   display: none !important;
 }
+
+/* SCROLLBARS */
+
+/* CHROME */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: none;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+}
+
+/* MOZILLA FIREFOX */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: blue ;
+}

@@ -1,3 +1,5 @@
+import { callToastify } from "./toastify.js"
+
 export const baseURL = "http://localhost:6278"
 
 export const { token } = getUser()
@@ -7,8 +9,8 @@ export const headers = {
     Authorization: `Bearer ${token}`
 }
 
-export const red = ""
-export const green = ""
+export const red = "#CE4646"
+export const green = "#4BA036"
 
 
 export function getUser() {
@@ -53,7 +55,8 @@ export async function register(data) {
 
     if(!register.ok) {
         // CHAMAR TOASTIFY AQUI
-        console.log(registerJSON.error[0])
+        // console.log(registerJSON.error[0])
+        callToastify("O email já está registrado",red)
     } else {
         window.location.replace("/src/pages/login.html")
     }
@@ -118,8 +121,8 @@ export async function login(data) {
 
 
     if(!login.ok) {
-        // CHAMAR TOASTIFY AQUI
-        console.log(loginJSON.error)
+        // console.log(loginJSON.error)
+        callToastify("Email ou senha incorretos",red)
     }
     else {
         setUser(loginJSON) // por enquanto passamos só o token pro localStorage
@@ -182,6 +185,15 @@ export async function updateProfile(data) {
 
     const userJSON = await user.json()
 
+    if(!user.ok) {
+        console.log(userJSON)
+        callToastify("Erro ao atualizar perfil",red)
+    } else {
+        callToastify("Perfil atualizado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboard.html")}, 1100)
+    }
+
+
     return userJSON
 }
 
@@ -228,6 +240,14 @@ export async function createDepartment(data) {
 
     const departmentJSON = await department
 
+    if(!department.ok) {
+        console.log(departmentJSON)
+        callToastify("Erro ao criar departamento",red)
+    } else {
+        callToastify("Departamento criado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
+
     return departmentJSON
 }
 
@@ -251,6 +271,14 @@ export async function hireUser(data) {
 
     const userJSON = await user.json()
 
+    if(!user.ok) {
+        console.log(userJSON)
+        callToastify("Erro ao contratar",red)
+    } else {
+        callToastify("Usuário contratado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
+
     return userJSON
 }
 
@@ -259,6 +287,18 @@ export async function fireUser(uuid) {
         method:"PATCH",
         headers: headers
     })
+
+    const userJSON = await user.json()
+
+    if(!user.ok) {
+        console.log(userJSON)
+        callToastify("Erro ao demitir",red)
+    } else {
+        callToastify("Usuário demitido",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
+
+    return userJSON
 }
 
 export async function editDepartment(data, uuid) {
@@ -270,15 +310,33 @@ export async function editDepartment(data, uuid) {
 
     const departmentJSON = await department
 
+    if(!department.ok) {
+        console.log(departmentJSON)
+        callToastify("Erro ao atualizar departamento",red)
+    } else {
+        callToastify("Departamento atualizado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
+
     return departmentJSON
 }
-
 
 export async function deleteDepartment(uuid) {
     const department = await fetch(`${baseURL}/departments/${uuid}`, {
         method: "DELETE",
         headers: headers
     })
+
+    // const departmentJSON = await department.json()
+
+    if(!department.ok) {
+        callToastify("Erro ao deletar departamento",red)
+    } else {
+        callToastify("Departamento deletado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
+
+    // return departmentJSON
 }
 
 export async function editUser(data, uuid) {
@@ -290,6 +348,13 @@ export async function editUser(data, uuid) {
 
     const userJSON = await user.json()
 
+    if(!user.ok) {
+        callToastify("Erro ao atualizar usuário",red)
+    } else {
+        callToastify("Usuário atualizado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
+
     return userJSON
 }
 
@@ -299,7 +364,10 @@ export async function deleteUser(uuid) {
         headers: headers
     })
 
-    const userJSON = await user.json()
-
-    return userJSON
+    if(!user.ok) {
+        callToastify("Erro ao deletar usuário",red)
+    } else {
+        callToastify("Usuário deletado",green)
+        setTimeout(() => {window.location.replace("/src/pages/dashboardAdmin.html")}, 1100)
+    }
 }

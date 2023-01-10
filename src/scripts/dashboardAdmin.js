@@ -1,4 +1,4 @@
-import { baseURL, headers, red, green, getCompanies, getCompaniesBySector, getUser, register, login, token, getUserInfo, checkAdmin, userCompanyDepartments, userCoworkers, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, fireUser, editDepartment, deleteDepartment, editUser, deleteUser } from "./requests.js"
+import { getCompanies, checkAdmin, isLogged, getAllDepartments, getAllDepartmentsFromCompany, getAllUsers, createDepartment, getUsersWithoutJob, hireUser, fireUser, editDepartment, deleteDepartment, editUser, deleteUser } from "./requests.js"
 
 import { menuMobile } from "./globalScripts.js"
 
@@ -169,8 +169,8 @@ async function modalDeleteDepartment(uuid) {
     deleteBtn.addEventListener("click", (event) => {
         event.preventDefault()
         deleteDepartment(uuid)
-        modal.close()
-        window.location.reload()
+        // modal.close()
+        // window.location.reload()
     })
 
     modal.showModal()
@@ -215,7 +215,7 @@ async function modalEditDepartment(uuid) {
         }
         console.log(event.target)
         editDepartment(data,uuid)
-        modal.close()
+        // modal.close()
     })
 
     console.log(department.description)
@@ -358,8 +358,8 @@ function modalEditUser(uuid) {
         }
         console.log(data)
         console.log(editUser(data,uuid))
-        modal.close()
-        window.location.reload()
+        // modal.close()
+        // window.location.reload()
     })
 
     modal.showModal()
@@ -395,8 +395,8 @@ async function modalDeleteUser(uuid) {
     deleteBtn.addEventListener("click", (event) => {
         event.preventDefault()
         deleteUser(uuid)
-        modal.close()
-        window.location.reload()
+        // modal.close()
+        // window.location.reload()
     })
     modal.showModal()
 }
@@ -451,8 +451,6 @@ async function modalViewDepartament(uuid) {
 
     const select = document.querySelector("#users")
     const usersWithoutJob = await getUsersWithoutJob()
-
-
 
     usersWithoutJob.forEach(user => {
         // console.log(user)
@@ -585,8 +583,8 @@ async function modalCreateDepartment() {
 
             console.log(data)
             createDepartment(data)
-            modal.close()
-            location.reload()
+            // modal.close()
+            // location.reload()
         })
 
         const closeBtn = document.querySelector("#closeBtn")
