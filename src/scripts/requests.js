@@ -53,7 +53,8 @@ export async function register(data) {
     if(!register.ok) {
         callToastify("O email já está registrado",red)
     } else {
-        window.location.replace("/src/pages/login.html")
+        callToastify("Usuário cadastrado",green)
+        setTimeout(() => {window.location.replace("/src/pages/login.html")}, 1000)
     }
 
     return registerJSON
@@ -111,13 +112,13 @@ export async function login(data) {
 
     const loginJSON = await login.json()
 
-
     if(!login.ok) {
         callToastify("Email ou senha incorretos",red)
     }
     else {
         setUser(loginJSON) // por enquanto passamos só o token pro localStorage
-        window.location.reload()
+        callToastify("Login realizado",green)
+        setTimeout(() => {window.location.reload()}, 1000)
     }
 
     return loginJSON
