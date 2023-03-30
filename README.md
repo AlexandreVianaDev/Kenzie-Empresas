@@ -21,6 +21,7 @@ Este projeto foi desenvolvido no final do segundo módulo da Kenzie Academy (4 m
 
 # 🛠️ Abrir e rodar o projeto
 
-**Rode a API local para a aplicação funcionar corretamente, conta de administrador é login: admin@mail.com senha: admin.**
+**Rode a API local para a aplicação funcionar corretamente, depois abra o github pages da aplicação, a conta de administrador é login: admin@mail.com senha: admin.**
 
-API Local: https://github.com/Jardel-Kenzie/m2-api-empresas
+API local: https://github.com/Jardel-Kenzie/m2-api-empresas
+Github pages: https://alexandrevianadev.github.io/gerenciamento-empresas/
