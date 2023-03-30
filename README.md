@@ -1,7 +1,26 @@
-Bom Projeto!! 
+# Resumo do projeto
+Kenzie Empresas é uma aplicação de gerenciamento de empresas.
+Este projeto foi desenvolvido no final do segundo módulo da Kenzie Academy (4 meses).
 
-Doc: https://kenzie-academy-brasil-developers.github.io/m2-empresas-doc
+# :hammer: Funcionalidades do projeto
 
-Fgima: https://www.figma.com/file/EEEdGd0gL5iLzaspW8DPXE/Kenzie-Empresas-Oficial
+- `Cadastro/Login/Autologin`: é possível criar conta e fazer login, o token fica salvo no localStorage fazendo o autologin
+- `Proteção de Rota`: não é possível acessar dashboards sem estar logado, usuários administradores só podem acessar dashboard admin, assim como usuários só podem acessar a dashboard de usuários
+- `Departamentos`: é possível visualizar, criar, editar e deletar departamentos dentro das empresas
+- `Colaboradores`: é possível visualizar, contratar e demitir funcionarios dentro dos departamentos, e é possível alterar suas informações como nível profissional (estágio, júnior, pleno e sênior) e alterar tipo de trabalho (home-office, hibrido e presencial).
+- `Usuários`: é possível visualizar e editar seu perfil, além de visualizar colaboradores da mesma empresa
 
-APi Local: https://github.com/Jardel-Kenzie/m2-api-empresas
+## ✔️ Técnicas e tecnologias utilizadas
+
+- ``JavaScript``
+- ``CSS``
+- ``HTML``
+- ``Mobile First``
+- ``Consumo de API - CRUD``
+
+
+# 🛠️ Abrir e rodar o projeto
+
+**Rode a API local para a aplicação funcionar corretamente, conta de administrador é login: admin@mail.com senha: admin.**
+
+API Local: https://github.com/Jardel-Kenzie/m2-api-empresas
