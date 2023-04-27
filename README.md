@@ -1,5 +1,6 @@
 # Resumo do projeto
 Kenzie Empresas é uma aplicação de gerenciamento de empresas.
+Nessa aplicação é possivel criar conta e se registrar como colaborador, além disso a aplicação conta com uma conta de admin que pode gerenciar empresas, departamentos e funcionários tanto livres quanto já empregados.
 Este projeto foi desenvolvido no final do segundo módulo da Kenzie Academy (4 meses).
 
 # :hammer: Funcionalidades do projeto
