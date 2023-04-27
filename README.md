@@ -26,4 +26,4 @@ Este projeto foi desenvolvido no final do segundo módulo da Kenzie Academy (4 m
 
 API local: https://github.com/Jardel-Kenzie/m2-api-empresas
 
-Github pages: https://alexandrevianadev.github.io/Kenzie-Empresas/
+Github pages: https://alexandrevianadev.github.io/Kenzie-Empresas/ 
