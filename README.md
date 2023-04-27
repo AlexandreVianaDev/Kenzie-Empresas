@@ -14,9 +14,9 @@ Este projeto foi desenvolvido no final do segundo módulo da Kenzie Academy (4 m
 ## ✔️ Técnicas e tecnologias utilizadas
 
 - ``JavaScript``
-- ``CSS``
-- ``HTML``
-- ``Mobile First``
+- ``CSS3``
+- ``HTML5``
+- ``Mobile-first``
 - ``Consumo de API - CRUD``
 
 
